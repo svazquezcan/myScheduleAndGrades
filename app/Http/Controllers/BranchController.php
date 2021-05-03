@@ -10,12 +10,6 @@ require 'libs/Security.php';
 
 class BranchController
 {
-    function __construct()
-    {
-        Security::adminRequired();
-        $this->view = new View();
-    }
-    
     /**
      * Muestra el listado de ramas.
      */
@@ -23,7 +17,7 @@ class BranchController
     {
         require 'models/Branch.php';
         $vars['branches'] = (new Branch())->getAll();
-        $this->view->show("branches/index.php", $vars);
+        return view('branches/index', $vars);
     }
 
     /**
@@ -39,7 +33,7 @@ class BranchController
         }
         require 'models/Branch.php';
         $vars['branches'] = (new Branch())->getAll();
-        $this->view->show("branches/create.php", $vars);
+        return view('branches/create', $vars);
     }
 
     /**
@@ -53,7 +47,7 @@ class BranchController
             header('Location: index.php?controller=branch');
         }
         $vars['branch'] = (new Branch())->getById($_GET['id']);
-        $this->view->show("branches/edit.php", $vars);
+        return view('branches/edit', $vars);
     }
 
     /**

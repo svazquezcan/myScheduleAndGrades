@@ -10,11 +10,6 @@ require 'libs/Security.php';
 
 class SubjectController
 {
-    function __construct()
-    {
-        Security::adminRequired();
-        $this->view = new View();
-    }
 
     /**
      * Muestra el listado de asignaturas.
@@ -29,7 +24,7 @@ class SubjectController
         require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
 
-        $this->view->show("subjects/index.php", $vars);
+        return view('subjects/index', $vars);
     }
 
     /**
@@ -50,7 +45,7 @@ class SubjectController
         require 'models/Branch.php';
         $vars['branches'] = (new Branch())->getAll();
 
-        $this->view->show("subjects/create.php", $vars);
+        return view('subjects/create', $vars);
     }
 
     /**
@@ -64,7 +59,7 @@ class SubjectController
             header('Location: index.php?controller=subject');
         }
         $vars['subject'] = (new Subject())->getById($_GET['id']);
-        $this->view->show("subjects/edit.php", $vars);
+        return view('subjects/edit', $vars);
     }
 
     /**

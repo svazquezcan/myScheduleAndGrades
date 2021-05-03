@@ -1,5 +1,5 @@
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
-
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'resources'. DIRECTORY_SEPARATOR . 'views'. DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+@include ('admin_common/header')
 <!-- Page Heading -->
 <?php if ($_SESSION['role'] == 'admin'): ?>
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

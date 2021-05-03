@@ -11,19 +11,13 @@ require 'libs/Security.php';
 
 class EventController
 {
-    function __construct()
-    {
-        Security::loggedInRequired();
-        $this->view = new View();
-    }
-
     /**
      * Muestra el listado de horarios.
      */
     public function index()
     {
         require 'models/Event.php';
-        $this->view->show("schedules/index.php");
+        return view('schedules/index');
     }
 
     /**

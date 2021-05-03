@@ -17,12 +17,6 @@ require 'models/Schedule.php';
 
 class DashboardController
 {
-    function __construct()
-    {
-        Security::adminRequired();
-        $this->view = new View();
-    }
-
     /**
      * Muestra la página de inicio del Dashboard.
      */
@@ -35,6 +29,6 @@ class DashboardController
         $vars['totalTeachers'] = (new Teacher())->getTotal();
         $vars['totalBranches'] = (new Branch())->getTotal();
         $vars['totalSchedules'] = (new Schedule())->getTotal();
-        $this->view->show("dashboard/index.php", $vars);
+        return view('dashboard/index.php', $vars);
     }
 }

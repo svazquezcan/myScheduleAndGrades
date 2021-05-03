@@ -5,14 +5,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 
 class UserController 
 {
-    function __construct()
-    {
-        $this->view = new View();
-    }
-
     /**
      * Login de usuario.
      */
@@ -49,7 +45,7 @@ class UserController
                 }
             }
         }
-        $this->view->show("users/login.php");
+        return view('users/login');
     }
 
     /**

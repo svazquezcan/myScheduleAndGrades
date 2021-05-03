@@ -2,32 +2,31 @@
 
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
+use App\Models\Schedule;
+
+
+//require 'libs/Security.php';
 
 /**
  * Controlador para los horarios.
  */
 
+
 class ScheduleController
 {
-    function __construct()
-    {
-        Security::loggedInRequired();
-        $this->view = new View();
-    }
 
     /**
      * Muestra el listado de horarios.
      */
     public function index()
     {
-        require 'models/Schedule.php';
-        $this->view->show("schedules/index.php");
+        //require 'models/Schedule.php';
+        return view('schedules/index');
     }
 
     public function load()
     {
-        require 'models/Schedule.php';
+        //require 'Models/Schedule.php';
         $data =  (new Schedule())->getSchedule(); 
         echo json_encode($data);
             
@@ -44,6 +43,6 @@ class ScheduleController
         require 'models/Subject.php';
         $vars['subjects'] = (new Subject())->getAll();
 
-        $this->view->show("schedules/create.php", $vars);
+        return view('schedules/create', $vars);
     }
 }

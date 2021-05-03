@@ -9,11 +9,6 @@ require 'libs/Security.php';
 
 class CourseController
 {
-    function __construct()
-    {
-        Security::adminRequired();
-        $this->view = new View();
-    }
 
     /**
      * Muestra el listado de cursos.
@@ -22,7 +17,7 @@ class CourseController
     {
         require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
-        $this->view->show("courses/index.php", $vars);
+        return view('courses/index', $vars);
     }
 
     /**
@@ -35,7 +30,7 @@ class CourseController
             (new Course())->create($_POST);
             header('Location: index.php?controller=course');
         }
-        $this->view->show("courses/create.php");
+        return view('courses/create');
     }
 
     /**
@@ -63,7 +58,7 @@ class CourseController
             header('Location: index.php?controller=course');
         }
         $vars['admin'] = (new Course())->getById($_GET['id']);
-        $this->view->show("courses/edit.php", $vars);
+        return view('courses/edit.php', $vars);
     }
 
     /**

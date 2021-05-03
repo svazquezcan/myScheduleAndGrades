@@ -11,11 +11,6 @@ require 'libs/Security.php';
 
 class TeacherController
 {
-    function __construct()
-    {
-        Security::adminRequired();
-        $this->view = new View();
-    }
 
     /**
      * Muestra el listado de profesores.
@@ -25,7 +20,7 @@ class TeacherController
         Security::adminRequired();
         require 'models/Teacher.php';
         $vars['teachers'] = (new Teacher())->getAll();
-        $this->view->show("teachers/index.php", $vars);
+        return view('teachers/index', $vars);
     }
 
     /**
@@ -39,7 +34,7 @@ class TeacherController
             (new Teacher())->create($_POST);
             header('Location: index.php?controller=teacher');
         }
-        $this->view->show("teachers/create.php");
+        return view('teachers/create');
     }
 
     /**
@@ -55,7 +50,7 @@ class TeacherController
             header('Location: index.php?controller=teacher');
         }
         $vars['teacher'] = (new Teacher())->getById($_GET['id']);        
-        $this->view->show("teachers/edit.php", $vars);
+        return view('teachers/edit.php', $vars);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
+//require 'libs/Security.php';
 
 /**
  * Controlador para los estudiantes.
@@ -10,20 +10,15 @@ require 'libs/Security.php';
 
 class StudentController
 {
-    function __construct()
-    {
-        $this->view = new View();
-    }
-
     /**
      * Muestra el listado de estudiantes.
      */
     public function index()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         require 'models/Student.php';
         $vars['students'] = (new Student())->getAll();
-        $this->view->show("students/index.php", $vars);
+        return view('students/index', $vars);
     }
 
     /**
@@ -36,9 +31,9 @@ class StudentController
             (new Student())->create($_POST);
             header('Location: index.php?controller=user&action=login&signup=ok');
         }
-        require 'models/Course.php';
+        require 'Models/Course.php';
         $vars['courses'] = (new Course())->getAll();
-        $this->view->show("students/signup.php", $vars);
+        return view('students/signup', $vars);
     }
 
     /**
@@ -52,9 +47,9 @@ class StudentController
             (new Student())->create($_POST);
             header('Location: index.php?controller=student');
         }
-        require 'models/Course.php';
+        require '../../models/Course.php';
         $vars['courses'] = (new Course())->getAll();
-        $this->view->show("students/create.php", $vars);
+        return view('students/create', $vars);
     }
 
     /**
@@ -73,7 +68,7 @@ class StudentController
         $vars['student'] = (new Student())->getById($_GET['id']);
         require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
-        $this->view->show("students/edit.php", $vars);
+        return view('students/edit', $vars);
     }
 
     /**

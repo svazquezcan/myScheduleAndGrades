@@ -10,12 +10,7 @@ require 'libs/Security.php';
 
 class AdminController
 {
-    function __construct()
-    {
-        Security::adminRequired();
-        $this->view = new View();
-    }
-
+   
     /**
      * Muestra el listado de administradores.
      */
@@ -23,7 +18,7 @@ class AdminController
     {
         require 'models/Admin.php';
         $vars['admins'] = (new Admin())->getAll();
-        $this->view->show("admins/index.php", $vars);
+        return view('admins/index', $vars);
     }
 
     /**
@@ -36,7 +31,7 @@ class AdminController
             (new Admin())->create($_POST);
             header('Location: index.php?controller=admin');
         }
-        $this->view->show("admins/create.php");
+        return view('admins/create');
     }
 
     /**
@@ -50,7 +45,7 @@ class AdminController
             header('Location: index.php?controller=admin');
         }
         $vars['admin'] = (new Admin())->getById($_GET['id']);
-        $this->view->show("admins/edit.php", $vars);
+        return view('admins/edit', $vars);
     }
 
     /**

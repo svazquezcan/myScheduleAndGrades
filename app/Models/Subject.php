@@ -1,23 +1,29 @@
 <?php
+
+namespace App\Models;
+
+use Iluminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+
 /**
  * Modelo para las asignaturas.
  */
 class Subject {
     protected $db;
  
-    public function __construct()
+    /*public function __construct()
     {
         $this->db = SPDO::singleton();
-    }
+    }*/
  
     /**
      * Obtener el número total de asignaturas.
      */
     public function getTotal()
     {
-        $query = $this->db->prepare('SELECT COUNT(*) FROM class');
-        $query->execute();
-        return $query->fetch()[0];
+        $query = DB::table('class')->count();
+        return $query;
     }
 
     /**

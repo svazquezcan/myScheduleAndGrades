@@ -11,12 +11,12 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 
     <!-- Fonts -->
-    <link href="assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/admin/css/styles.css" rel="stylesheet">
-    <link href="assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../../assets/admin/css/styles.css" rel="stylesheet">
+    <link href="../../assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -54,7 +54,8 @@
                                         <p class="text-success"><i class="fas fa-check-circle"></i> ¡Gracias por registrarte! Ya puedes iniciar sesión.</p>
                                     <?php endif; ?>
 
-                                    <form class="user" method="post" action="index.php?controller=user&action=login">
+                                    <form class="user" method="post" action="dashboard">
+                                    @csrf
                                         <div class="form-group">
                                             <input required type="text" class="form-control form-control-user" id="username" name="username" aria-describedby="username" placeholder="Nombre de usuario">
                                         </div>
@@ -86,12 +87,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins -->
-    <script src="assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Scripts -->
-    <script src="assets/admin/js/scripts.js"></script>
+    <script src="../../assets/admin/js/scripts.js"></script>
 
 </body>
 

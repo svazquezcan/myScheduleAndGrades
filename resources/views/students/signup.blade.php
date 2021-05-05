@@ -11,12 +11,12 @@
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 
     <!-- Fonts -->
-    <link href="assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/admin/css/styles.css" rel="stylesheet">
-    <link href="assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../../assets/admin/css/styles.css" rel="stylesheet">
+    <link href="../../assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -71,9 +71,10 @@
                                         <div class="form-group">
                                             <label for="exampleFormControlSelect2">Cursos en los que estás matriculado:</label>
                                             <select required multiple class="form-control" name="id_courses[]">
-                                                <?php while($course = $courses->fetch(PDO::FETCH_ASSOC)): ?>
-                                                    <option value="<?php echo $course['id_course'] ?>"><?php echo $course['name'] ?></option>
-                                                <?php endwhile; ?>
+                                                <?php $courses = DB::table('courses')->get() ?>
+                                                    <?php foreach($courses as $course): ?>
+                                                        <option value="<?php echo $course->id_course ?>"><?php echo $course-> name ?></option>
+                                                    <?php endforeach; ?>
                                             </select>
                                         </div>
 
@@ -102,12 +103,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins -->
-    <script src="assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../../assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Scripts -->
-    <script src="assets/admin/js/scripts.js"></script>
+    <script src="../../assets/js/scripts.js"></script>
 
 </body>
 

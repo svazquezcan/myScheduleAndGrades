@@ -1,23 +1,28 @@
 <?php
+
+namespace App\Models;
+
+use Iluminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 /**
  * Modelo para las ramas.
  */
 class Branch {
     protected $db;
  
-    public function __construct()
+    /*public function __construct()
     {
         $this->db = SPDO::singleton();
-    }
+    }*/
  
     /**
      * Obtener el número total de reamas.
      */
     public function getTotal()
     {
-        $query = $this->db->prepare('SELECT COUNT(*) FROM branches');
-        $query->execute();
-        return $query->fetch()[0];
+        $query = DB::table('branches')->count();
+        return $query;
     }
 
     /**

@@ -18,7 +18,15 @@ use Illuminate\Support\Facades\Route;
 });
 */
 
-//Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index');
+
+Route::match(['get', 'post'], '/user/login', 'UserController@login');
+
+Route::get('/user/register', 'StudentController@signup');
+
+Route::match(['get', 'post'], 'user/dashboard', 'DashboardController@index');
+
+
 
 //Route::get('/schedule', 'ScheduleController@index');
 

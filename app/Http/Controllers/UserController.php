@@ -6,8 +6,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Student;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-class UserController 
+class UserController extends Controller
 {
     /**
      * Login de usuario.
@@ -15,20 +20,21 @@ class UserController
     public function login()
     {
         if ($_POST) {
-            require 'models/Admin.php';
+            
             $admin = (new Admin())->getByUsername($_POST['username']);
+            var_dump($_POST);
+            var_dump($admin);
             if ($admin) {
                 if (password_verify($_POST['password'], $admin['password'])) {
-                    session_regenerate_id();
+                    //session_regenerate_id();
                     $_SESSION['loggedIn'] = true;
                     $_SESSION['user'] = $admin;
                     $_SESSION['role'] = 'admin';
-                    header('Location: index.php?controller=dashboard');
+                    header('Location: dashboard');
                 } else {
                     header('Location: index.php?controller=user&action=login&credentials=wrong');
                 }
             } else {
-                require 'models/Student.php';
                 $student = (new Student())->getByUsername($_POST['username']);
                 if ($student) {
                     if (password_verify($_POST['password'], $student['password'])) {

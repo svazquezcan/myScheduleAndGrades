@@ -1,8 +1,13 @@
 <?php
+
+namespace App;
+
+use Iluminate\Database\Eloquent\Model;
+
 /**
  * Modelo para los horarios.
  */
-class Event {
+class Event extends Model {
     protected $db;
  
     public function __construct()

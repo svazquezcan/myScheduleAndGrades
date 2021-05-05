@@ -1,23 +1,28 @@
 <?php
+
+namespace App\Models;
+
+use Iluminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 /**
  * Modelo para los administradores.
  */
 class Admin {
     protected $db;
  
-    public function __construct()
+    /*public function __construct()
     {
         $this->db = SPDO::singleton();
-    }
+    }*/
 
     /**
      * Obtener el número total de administradores.
      */
     public function getTotal()
     {
-        $query = $this->db->prepare('SELECT COUNT(*) FROM users_admin');
-        $query->execute();
-        return $query->fetch()[0];
+        $query = DB::table('users_admin')->count();
+        //$query->execute();
+        return $query;
     }
 
     /**
@@ -25,9 +30,11 @@ class Admin {
      */
     public function getByUsername($username)
     {
-        $query = $this->db->prepare('SELECT * FROM users_admin WHERE username = ?');
-        $query->execute([$username]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $user = DB::table('users_admin')->where('username',$username)->first();
+        //$query->execute([$username]);
+        $result = json_decode(json_encode($user), true);
+        return $result;
+        //return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     /**

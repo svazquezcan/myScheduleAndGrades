@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+
 
 
 //require 'libs/Security.php';
@@ -12,7 +15,7 @@ use App\Models\Schedule;
  */
 
 
-class ScheduleController
+class ScheduleController extends Controller
 {
 
     /**

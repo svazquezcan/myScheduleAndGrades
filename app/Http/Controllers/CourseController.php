@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
-
+use App\Models\Course;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 /**
  * Controlador para los cursos.
  */
 
-class CourseController
+class CourseController extends Controller
 {
 
     /**

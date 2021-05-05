@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 //require 'libs/Security.php';
+use App\Models\Student;
+use App\Models\Course;  
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 /**
  * Controlador para los estudiantes.
@@ -16,7 +24,6 @@ class StudentController
     public function index()
     {
         //Security::adminRequired();
-        require 'models/Student.php';
         $vars['students'] = (new Student())->getAll();
         return view('students/index', $vars);
     }
@@ -26,12 +33,18 @@ class StudentController
      */
     public function signup()
     {
-        if ($_POST) {
-            require 'models/Student.php';
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+        /*if ($_POST) {
             (new Student())->create($_POST);
             header('Location: index.php?controller=user&action=login&signup=ok');
-        }
-        require 'Models/Course.php';
+        }*/
         $vars['courses'] = (new Course())->getAll();
         return view('students/signup', $vars);
     }
@@ -47,7 +60,7 @@ class StudentController
             (new Student())->create($_POST);
             header('Location: index.php?controller=student');
         }
-        require '../../models/Course.php';
+        require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
         return view('students/create', $vars);
     }

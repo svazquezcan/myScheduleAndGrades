@@ -1,23 +1,29 @@
 <?php
+
+namespace App\Models;
+
+use Iluminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+
 /**
  * Modelo para los cursos.
  */
 class Course {
     protected $db;
  
-    public function __construct()
+    /*public function __construct()
     {
         $this->db = SPDO::singleton();
-    }
+    }*/
 
     /**
      * Obtener el número total de cursos.
      */
     public function getTotal()
     {
-        $query = $this->db->prepare('SELECT COUNT(*) FROM courses');
-        $query->execute();
-        return $query->fetch()[0];
+        $query = DB::table('courses')->count();
+        return $query;
     }
 
     /**
@@ -35,8 +41,9 @@ class Course {
      */
     public function getAll()
     {
-        $query = $this->db->prepare('SELECT * FROM courses');
-        $query->execute();
+        //$query = $this->db->prepare('SELECT * FROM courses');
+        $query = DB::select('SELECT * FROM courses');
+        //$query->execute();
         return $query;
     }    
 

@@ -1,23 +1,29 @@
 <?php
+
+namespace App\Models;
+
+use Iluminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+
 /**
  * Modelo para los profesores.
  */
 class Teacher {
     protected $db;
  
-    public function __construct()
+    /*public function __construct()
     {
         $this->db = SPDO::singleton();
-    }
+    }*/
  
     /**
      * Obtener el número total de profesores.
      */
     public function getTotal()
     {
-        $query = $this->db->prepare('SELECT COUNT(*) FROM teachers');
-        $query->execute();
-        return $query->fetch()[0];
+        $query = DB::table('teachers')->count();
+        return $query;
     }
 
     /**

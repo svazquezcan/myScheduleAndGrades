@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-require 'libs/Security.php';
+use Illuminate\Support\Facades\DB;
 
 /**
  * Controlador para los eventos

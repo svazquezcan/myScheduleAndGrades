@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
+use App\Models\Course;
+use App\Models\Subject;
+use App\Models\Teacher;
+use App\Models\Branch;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Controlador para las asignaturas.
  */
 
-class SubjectController
+class SubjectController extends Controller
 {
 
     /**
@@ -16,12 +21,9 @@ class SubjectController
      */
     public function index()
     {
-        Security::adminRequired();
-        require 'models/Subject.php';
+        //Security::adminRequired();
         $vars['subjects'] = (new Subject())->getAll();
-        require 'models/Teacher.php';
         $vars['teachers'] = (new Teacher())->getAll();        
-        require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
 
         return view('subjects/index', $vars);
@@ -32,17 +34,13 @@ class SubjectController
      */
     public function create()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if ($_POST) {
-            require 'models/Subject.php';
             (new Subject())->create($_POST);            
             header('Location: index.php?controller=subject');
         }
-        require 'models/Teacher.php';
         $vars['teachers'] = (new Teacher())->getAll();
-        require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
-        require 'models/Branch.php';
         $vars['branches'] = (new Branch())->getAll();
 
         return view('subjects/create', $vars);
@@ -53,7 +51,6 @@ class SubjectController
      */
     public function edit()
     {
-        require 'models/Subject.php';
         if ($_POST) {
             (new Subject())->edit($_POST);
             header('Location: index.php?controller=subject');
@@ -67,9 +64,8 @@ class SubjectController
      */
     public function delete()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if($_GET) {
-            require 'models/Subject.php';
             (new Subject())->delete($_GET['id']);
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }

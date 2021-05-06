@@ -31,9 +31,10 @@ class Teacher {
      */
     public function get($id) 
     {
-        $query = $this->db->prepare('SELECT FROM teachers WHERE id_teacher = ?');
-        $query->execute([$id]);
-        return $query;
+        $teacher = DB::table('teachers')->where('id_teacher',$id);
+        //$query->execute([$id]);
+        $result = json_decode(json_encode($teacher), true);
+        return $result;
     }
 
     /**
@@ -41,9 +42,10 @@ class Teacher {
      */
     public function getNameById($id) 
     {
-        $query = $this->db->prepare('SELECT name, surname FROM teachers WHERE id_teacher = ?');
-        $query->execute([$id]);
-        return $query;
+        $teacher = DB::table('teachers')->pluck('name', 'surname')->where('id_teacher',$id);
+        //$query->execute([$id]);
+        $result = json_decode(json_encode($teacher), true);
+        return $result;
     }    
 
     /**
@@ -51,9 +53,10 @@ class Teacher {
      */
     public function getById($id)
     {
-        $query = $this->db->prepare('SELECT * FROM teachers WHERE id_teacher = ?');
-        $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $teacher = DB::table('teachers')->where('id_teacher',$id);
+        //$query->execute([$id]);
+        $result = json_decode(json_encode($teacher), true);
+        return $result;
     }
 
     /**
@@ -61,9 +64,10 @@ class Teacher {
      */
     public function getAll()
     {
-        $query = $this->db->prepare('SELECT * FROM teachers');
-        $query->execute();
-        return $query;
+        $teachers = DB::table('teachers')->get();
+        //$query->execute();
+        $result = json_decode(json_encode($teachers), true);
+        return $result;
     }    
     
     /**

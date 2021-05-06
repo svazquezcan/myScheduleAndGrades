@@ -1,4 +1,5 @@
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+@include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -23,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while($course = $courses->fetch(PDO::FETCH_ASSOC)): ?>
+                    @foreach ($courses as $course)
                         <tr>
                             <td><?php echo $course['id_course'] ?></td>
                             <td><?php echo $course['name'] ?></td>
@@ -53,12 +54,12 @@
                                 </a>
                             </td>
                         </tr>
-                    <?php endwhile; ?>
-                  
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>
+@include ('admin_common/footer')
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

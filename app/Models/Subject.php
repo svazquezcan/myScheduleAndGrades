@@ -31,9 +31,10 @@ class Subject {
      */
     public function getAll()
     {
-        $query = $this->db->prepare('SELECT * FROM class');
-        $query->execute();
-        return $query;
+        $subjects = DB::table('class')->get();
+        $result = json_decode(json_encode($subjects), true);
+        //$query->execute();
+        return $result;
     }
 
     /**

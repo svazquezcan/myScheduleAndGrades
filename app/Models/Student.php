@@ -30,9 +30,10 @@ class Student {
      */
     public function getByUsername($username)
     {
-        $query = $this->db->prepare('SELECT * FROM students WHERE username = ?');
-        $query->execute([$username]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $user = DB::table('students')->where('username',$username);
+        //$query->execute([$username]);
+        $result = json_decode(json_encode($user), true);
+        return $result;
     }
 
     /**
@@ -60,9 +61,10 @@ class Student {
      */
     public function getAll()
     {
-        $query = $this->db->prepare('SELECT * FROM students');
-        $query->execute();
-        return $query;
+        $students = DB::table('students')->get();
+        $result = json_decode(json_encode($students), true);
+        //$query->execute();
+        return $result;
     }
 
     /**

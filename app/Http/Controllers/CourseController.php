@@ -16,7 +16,6 @@ class CourseController extends Controller
      */
     public function index()
     {
-        require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
         return view('courses/index', $vars);
     }
@@ -27,7 +26,6 @@ class CourseController extends Controller
     public function create()
     {
         if ($_POST) {
-            require 'models/Course.php';
             (new Course())->create($_POST);
             header('Location: index.php?controller=course');
         }
@@ -39,7 +37,6 @@ class CourseController extends Controller
      */
     public function edit()
     {
-        require_once 'models/Course.php';
         if ($_POST) {
 
             /*
@@ -67,7 +64,6 @@ class CourseController extends Controller
      */
     public function delete()
     {
-        require 'models/Course.php';
         (new Course())->delete($_GET['id']);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }

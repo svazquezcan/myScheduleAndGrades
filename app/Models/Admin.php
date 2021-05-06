@@ -42,9 +42,10 @@ class Admin {
      */
     public function getById($id)
     {
-        $query = $this->db->prepare('SELECT * FROM users_admin WHERE id_user_admin = ?');
-        $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $admin = DB::table('users_admin')->where('id_user_admin',$id)->first();
+        //$query->execute([$id]);
+        $result = json_decode(json_encode($admin), true);
+        return $result;
     }
  
     /**
@@ -52,9 +53,10 @@ class Admin {
      */
     public function getAll()
     {
-        $query = $this->db->prepare('SELECT * FROM users_admin');
-        $query->execute();
-        return $query;
+        $admins = DB::table('users_admin')->get();
+        $result = json_decode(json_encode($admins), true);
+        //$query->execute();
+        return $result;
     }
 
     /**

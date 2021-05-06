@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
  * Controlador para los estudiantes.
  */
 
-class StudentController
+class StudentController extends Controller
 {
     /**
      * Muestra el listado de estudiantes.
@@ -60,7 +60,6 @@ class StudentController
             (new Student())->create($_POST);
             header('Location: index.php?controller=student');
         }
-        require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
         return view('students/create', $vars);
     }
@@ -70,16 +69,14 @@ class StudentController
      */
     public function edit()
     {
-        if (!($_SESSION['role'] == 'student' && $_SESSION['user']['id'] == $_GET['id'])) {
+        /*if (!($_SESSION['role'] == 'student' && $_SESSION['user']['id'] == $_GET['id'])) {
             Security::adminRequired();
-        }
-        require 'models/Student.php';
+        }*/
         if ($_POST) {
             (new Student())->edit($_POST);
             header('Location: index.php?controller=student');
         }
         $vars['student'] = (new Student())->getById($_GET['id']);
-        require 'models/Course.php';
         $vars['courses'] = (new Course())->getAll();
         return view('students/edit', $vars);
     }
@@ -90,7 +87,6 @@ class StudentController
     public function delete()
     {
         Security::adminRequired();
-        require 'models/Student.php';
         (new Student())->delete($_GET['id']);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }

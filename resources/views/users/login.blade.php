@@ -54,7 +54,7 @@
                                         <p class="text-success"><i class="fas fa-check-circle"></i> ¡Gracias por registrarte! Ya puedes iniciar sesión.</p>
                                     <?php endif; ?>
 
-                                    <form class="user" method="post" action="dashboard">
+                                    <form class="user" method="post" action="login">
                                     @csrf
                                         <div class="form-group">
                                             <input required type="text" class="form-control form-control-user" id="username" name="username" aria-describedby="username" placeholder="Nombre de usuario">

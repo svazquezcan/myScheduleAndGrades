@@ -8,15 +8,15 @@
     <title>MYSCHEDULE</title>
 
     <!-- Icon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
 
     <!-- Fonts -->
-    <link href="assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/admin/css/styles.css" rel="stylesheet">
-    <link href="assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../assets/admin/css/styles.css" rel="stylesheet">
+    <link href="../assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" rel="stylesheet">
 </head>
 
@@ -30,11 +30,12 @@
 
             <!-- Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                <?php if ($_SESSION['role'] == 'admin'): ?>
+            <?php session_start(); echo $_SESSION['role']; ?>
+                @if ($_SESSION['role'] == 'admin')
                     href="index.php?controller=dashboard"
-                <?php else: ?>
+                @else
                     href="index.php?controller=schedule"
-                <?php endif; ?>
+                @endif
             >
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-calendar-alt"></i>
@@ -44,96 +45,87 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-            <?php if ($_SESSION['role'] == 'admin'): ?>
+            @if ($_SESSION['role'] == 'admin')
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'dashboard'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("dashboard") ? "active" : "" }}">
+                    <a class="nav-link" href="dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'admin'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=admin">
-                    <i class="fas fa-fw fa-user-cog"></i>
-                    <span>Administradores</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("adminIndex") ? "active" : "" }}">
+                    <a class="nav-link" href="admins">
+                        <i class="fas fa-fw fa-user-cog"></i>
+                        <span>Administradores</span></a>
+                </li>
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'student'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=student">
-                    <i class="fas fa-fw fa-user-graduate"></i>
-                    <span>Estudiantes</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("studentIndex") ? "active" : "" }}">
+                    <a class="nav-link" href="students">
+                        <i class="fas fa-fw fa-user-graduate"></i>
+                        <span>Estudiantes</span></a>
+                </li>
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'course'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=course">
-                    <i class="fas fa-fw fa-chalkboard"></i>
-                    <span>Cursos</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("courses") ? "active" : "" }}">
+                    <a class="nav-link" href="courses">
+                        <i class="fas fa-fw fa-chalkboard"></i>
+                        <span>Cursos</span></a>
+                </li>
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'class'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=subject">
-                    <i class="fas fa-fw fa-book-open"></i>
-                    <span>Asignaturas</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("classes") ? "active" : "" }}">
+                    <a class="nav-link" href="subjects">
+                        <i class="fas fa-fw fa-book-open"></i>
+                        <span>Asignaturas</span></a>
+                </li>
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'teacher'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=teacher">
-                    <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Profesores</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("teachers") ? "active" : "" }}">
+                    <a class="nav-link" href="teachers">
+                        <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Profesores</span></a>
+                </li>
 
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'branch'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=branch">
-                    <i class="fas fa-fw fa-code-branch"></i>
-                    <span>Ramas</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("branches") ? "active" : "" }}">
+                    <a class="nav-link" href="branches">
+                        <i class="fas fa-fw fa-code-branch"></i>
+                        <span>Ramas</span></a>
+                </li>
+            
+                <li class="
+                    nav-item
+                    "{{ Request::is("schedules") ? "active" : "" }}">
+                    <a class="nav-link" href="schedules">
+                        <i class="fas fa-fw fa-calendar-alt"></i>
+                        <span>Horarios</span></a>
+                </li>
 
-            <?php endif; ?>
-
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'schedule'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link" href="index.php?controller=schedule">
-                    <i class="fas fa-fw fa-calendar-alt"></i>
-                    <span>Horarios</span></a>
-            </li>
-
-            <li class="
-                nav-item
-                <?php if($_GET['controller'] == 'user' && $_GET['action'] == 'edit'): ?>active<?php endif ?>
-            ">
-                <a class="nav-link"
-                    <?php if ($_SESSION['role'] == 'admin'): ?>
-                        href="index.php?controller=admin&action=edit&id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
-                    <?php else: ?>
-                        href="index.php?controller=student&action=edit&id=<?php echo $_SESSION['user']['id'] ?>"
-                    <?php endif; ?>
-                >
-                    <i class="fas fa-fw fa-user-edit"></i>
-                    <span>Perfil</span></a>
-            </li>
+                <li class="
+                    nav-item
+                    "{{ Request::is("adminProfile") ? "active" : "" }}">
+                    <a class="nav-link"
+                        @if ($_SESSION['role'] == 'admin')
+                            href="admin/edit=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                        @else
+                            href="student/edit=<?php echo $_SESSION['user']['id'] ?>"
+                        @endif
+                    >
+                        <i class="fas fa-fw fa-user-edit"></i>
+                        <span>Perfil</span></a>
+                </li>
+            
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -167,22 +159,22 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-lg-inline text-gray-600 small">
                                     <?php echo $_SESSION['user']['username'] ?>
-                                    <?php if ($_SESSION['role'] == 'admin'): ?>
+                                    @if ($_SESSION['role'] == 'admin')
                                         <small>(administrador)</small>
-                                    <?php else: ?>
+                                    @else
                                         <small>(estudiante)</small>
-                                    <?php endif; ?>
+                                    @endif
                                 </span>
-                                <img class="img-profile rounded-circle" src="assets/admin/img/user.svg">
+                                <img class="img-profile rounded-circle" src="../assets/admin/img/user.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item"
-                                    <?php if ($_SESSION['role'] == 'admin'): ?>
+                                    @if ($_SESSION['role'] == 'admin')
                                         href="index.php?controller=admin&action=edit&id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
-                                    <?php else: ?>
+                                    @else
                                         href="index.php?controller=student&action=edit&id=<?php echo $_SESSION['user']['id'] ?>"
-                                    <?php endif; ?>
+                                    @endif
                                 >
                                     <i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
@@ -198,6 +190,7 @@
                     </ul>
 
                 </nav>
+                
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

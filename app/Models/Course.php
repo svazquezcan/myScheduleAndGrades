@@ -31,20 +31,20 @@ class Course {
      */
     public function getById($id)
     {
-        $query = $this->db->prepare('SELECT * FROM courses WHERE id_course = ?');
-        $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
+        $course = DB::table('courses')->where('id_course',$id);
+        //$query->execute([$id]);
+        $result = json_decode(json_encode($course), true);
+        return $result;    }
  
     /**
      * Listado de cursos.
      */
     public function getAll()
     {
-        //$query = $this->db->prepare('SELECT * FROM courses');
-        $query = DB::select('SELECT * FROM courses');
+        $courses = DB::table('courses')->get();
+        $result = json_decode(json_encode($courses), true);
         //$query->execute();
-        return $query;
+        return $result;
     }    
 
     /** 

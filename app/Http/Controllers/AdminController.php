@@ -1,14 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
+use App\Models\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Controlador para los administradores.
  */
 
 
-class AdminController
+class AdminController extends Controller
 {
    
     /**
@@ -16,7 +18,6 @@ class AdminController
      */
     public function index()
     {
-        require 'models/Admin.php';
         $vars['admins'] = (new Admin())->getAll();
         return view('admins/index', $vars);
     }
@@ -27,7 +28,6 @@ class AdminController
     public function create()
     {
         if ($_POST) {
-            require 'models/Admin.php';
             (new Admin())->create($_POST);
             header('Location: index.php?controller=admin');
         }
@@ -39,7 +39,6 @@ class AdminController
      */
     public function edit()
     {
-        require 'models/Admin.php';
         if ($_POST) {
             (new Admin())->edit($_POST);
             header('Location: index.php?controller=admin');
@@ -53,7 +52,6 @@ class AdminController
      */
     public function delete()
     {
-        require 'models/Admin.php';
         (new Admin())->delete($_GET['id']);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }

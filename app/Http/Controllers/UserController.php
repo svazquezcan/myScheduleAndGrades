@@ -17,20 +17,20 @@ class UserController extends Controller
     /**
      * Login de usuario.
      */
-    public function login()
+    public function login(Request $request)
     {
         if ($_POST) {
             
             $admin = (new Admin())->getByUsername($_POST['username']);
-            var_dump($_POST);
-            var_dump($admin);
             if ($admin) {
                 if (password_verify($_POST['password'], $admin['password'])) {
-                    //session_regenerate_id();
+                    session_start();
+                    $request->session()->regenerate();
+
                     $_SESSION['loggedIn'] = true;
                     $_SESSION['user'] = $admin;
                     $_SESSION['role'] = 'admin';
-                    header('Location: dashboard');
+                    return redirect('dashboard');
                 } else {
                     header('Location: index.php?controller=user&action=login&credentials=wrong');
                 }

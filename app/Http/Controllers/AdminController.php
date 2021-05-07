@@ -29,7 +29,7 @@ class AdminController extends Controller
     {
         if ($_POST) {
             (new Admin())->create($_POST);
-            header('Location: index.php?controller=admin');
+            return redirect()->route('adminIndex');
         }
         return view('admins/create');
     }
@@ -41,7 +41,7 @@ class AdminController extends Controller
     {
         if ($_POST) {
             (new Admin())->edit($_POST);
-            header('Location: index.php?controller=admin');
+            return redirect()->route('adminIndex');
         }
         $vars['admin'] = (new Admin())->getById($_GET['id']);
         return view('admins/edit', $vars);
@@ -53,6 +53,6 @@ class AdminController extends Controller
     public function delete()
     {
         (new Admin())->delete($_GET['id']);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        return redirect()->route('adminIndex');
     }
 }

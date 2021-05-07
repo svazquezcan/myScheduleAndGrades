@@ -12,7 +12,9 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="index.php?controller=teacher&action=create">                
+            <form class="user" method="post" action="index.php?controller=teacher&action=create">  
+            @csrf
+              
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input required type="text" maxlength="20" class="form-control form-control-user" name="name" placeholder="Nombre">

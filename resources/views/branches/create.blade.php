@@ -13,6 +13,7 @@
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
             <form class="user" method="post" action="index.php?controller=branch&action=create">   
+            @csrf
 
                 <div class="form-group">
                     <input required type="text" maxlength="100" class="form-control form-control-user" name="name" placeholder="Nombre de la rama">                    

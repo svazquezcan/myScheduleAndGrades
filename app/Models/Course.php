@@ -31,10 +31,11 @@ class Course {
      */
     public function getById($id)
     {
-        $course = DB::table('courses')->where('id_course',$id);
+        $course = DB::table('courses')->where('id_course',$id)->first();
         //$query->execute([$id]);
         $result = json_decode(json_encode($course), true);
-        return $result;    }
+        return $result;    
+    }
  
     /**
      * Listado de cursos.
@@ -53,7 +54,14 @@ class Course {
     public function create($course)
     {
         // Course
-        $query = $this->db->prepare('
+        $id_course = DB::table('courses')->insertGetId(
+            ['name'=>$course['name'],
+            'description'=>$course['description'],
+            'date_start'=>$course['date_start'],
+            'date_end'=>date('Y-m-d', strtotime($course['date_start']. '+2 years')),
+            'active'=>$course['active']]
+        );      
+        /*$query = $this->db->prepare('
             INSERT INTO courses (name, description, date_start, date_end, active)
             VALUES (?, ?, ?, ?, ?)
          ');
@@ -64,7 +72,7 @@ class Course {
             date('Y-m-d', strtotime($course['date_start']. '+2 years')),
             $course['active'],
         ]);
-        $id_course = $this->db->lastInsertId();               
+        $id_course = $this->db->lastInsertId();*/               
  
         return $id_course;
     }
@@ -79,8 +87,14 @@ class Course {
         } else if ($course['active'] == "Inactivo" || $course['active'] == "inactivo") {
             $course['active'] = 0;
         }
-
-        $query = $this->db->prepare('UPDATE courses SET name=?,description=?,date_start=?,date_end=?,active=? WHERE id_course = ? LIMIT 1');
+        DB::table('courses')->where('id_course',$course['id_course'])->update(
+            ['name'=>$course['name'],
+            'description'=>$course['description'],
+            'date_start'=>$course['date_start'],
+            'date_end'=>date('Y-m-d', strtotime($course['date_start']. '+2 years')),
+            'active'=>$course['active']]
+        );
+        /*$query = $this->db->prepare('UPDATE courses SET name=?,description=?,date_start=?,date_end=?,active=? WHERE id_course = ? LIMIT 1');
         $query->execute([
             $course['name'], 
             $course['description'], 
@@ -88,7 +102,7 @@ class Course {
             $course['date_end'], 
             $course['active'], 
             $course['id_course'],
-        ]);
+        ]);*/
     }
 
     /**
@@ -96,7 +110,6 @@ class Course {
      */
     public function delete($id)
     {
-        $query = $this->db->prepare('DELETE FROM courses WHERE id_course = ?');
-        $query->execute([$id]);
+        DB::table('courses')->where('id_course','=',$id)->delete();
     }
 }

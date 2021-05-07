@@ -1,9 +1,10 @@
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+@include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="index.php?controller=admin">Administradores</a>
+        <a href="admins">Administradores</a>
         <small> > Crear</small>
     </h1>
 </div>
@@ -12,7 +13,8 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="index.php?controller=admin&action=create">
+            <form class="user" method="post" action="create">
+            @csrf
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input required type="text" maxlength="20" class="form-control form-control-user" name="username" placeholder="Nombre de usuario">
@@ -38,4 +40,5 @@
     </div>
 </div>
 
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>
+@include ('admin_common/footer')
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

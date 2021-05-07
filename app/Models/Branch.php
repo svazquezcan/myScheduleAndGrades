@@ -30,9 +30,10 @@ class Branch {
      */
     public function getAll()
     {
-        $query = $this->db->prepare('SELECT * FROM branches');
-        $query->execute();
-        return $query;
+        $branches = DB::table('branches')->get();
+        $result = json_decode(json_encode($branches), true);
+        //$query->execute();
+        return $result;
     }
 
     /**

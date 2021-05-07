@@ -1,9 +1,10 @@
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+@include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="index.php?controller=subject">Asignaturas</a>
+        <a href="subjects">Asignaturas</a>
         <small> > Crear</small>
     </h1>
 </div>
@@ -12,7 +13,8 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="index.php?controller=subject&action=create">
+            <form class="user" method="post" action="create">
+            @csrf
 
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -35,12 +37,12 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Profesor:</label>
                     <select required class="form-control" name="id_teacher">
-                        <?php while ($teacher = $teachers->fetch(PDO::FETCH_ASSOC)) : ?>
+                        @foreach ($teachers as $teacher)
                             <option value="<?php echo $teacher['id_teacher'] ?>">
                                 <?php echo $teacher['name'] ?>
                                 <?php echo $teacher['surname'] ?>
                             </option>
-                        <?php endwhile; ?>
+                        @endforeach
                     </select>
                 </div>
                 
@@ -56,20 +58,20 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Curso:</label>
                     <select required class="form-control" name="id_course">
-                        <?php while ($course = $courses->fetch(PDO::FETCH_ASSOC)) : ?>
+                        @foreach ($courses as $course)
                             <option value="<?php echo $course['id_course'] ?>"><?php echo $course['name'] ?></option>
-                        <?php endwhile; ?>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Rama:</label>
                     <select required class="form-control" name="id_branch">
-                        <?php while ($branch = $branches->fetch(PDO::FETCH_ASSOC)) : ?>
+                        @foreach ($branches as $branch)
                             <option value="<?php echo $branch['id_branch'] ?>">
                                 <?php echo $branch['name'] ?>
                             </option>
-                        <?php endwhile; ?>
+                        @endforeach
                     </select>
                 </div>
                 
@@ -97,5 +99,5 @@
         </div>
     </div>
 </div>
-
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>
+@include ('admin_common/footer')
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

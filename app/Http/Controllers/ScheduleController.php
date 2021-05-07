@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\Subject;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -38,13 +39,11 @@ class ScheduleController
     
     public function create() 
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if ($_POST) {
-            require 'models/Schedule.php';
             (new Schedule())->create($_POST);
             header('Location: index.php?controller=schedule');
         }
-        require 'models/Subject.php';
         $vars['subjects'] = (new Subject())->getAll();
 
         return view('schedules/create', $vars);

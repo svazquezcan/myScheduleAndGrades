@@ -53,10 +53,10 @@ class CourseController extends Controller
             */
 
             (new Course())->edit($_POST);
-            header('Location: index.php?controller=course');
+            return redirect()->route('courses');
         }
-        $vars['admin'] = (new Course())->getById($_GET['id']);
-        return view('courses/edit.php', $vars);
+        $vars['course'] = (new Course())->getById($_GET['id']);
+        return view('courses/edit', $vars);
     }
 
     /**
@@ -65,6 +65,6 @@ class CourseController extends Controller
     public function delete()
     {
         (new Course())->delete($_GET['id']);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        return redirect()->route('courses');
     }
 }

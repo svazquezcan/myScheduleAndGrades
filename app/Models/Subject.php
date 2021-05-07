@@ -42,9 +42,9 @@ class Subject {
      */
     public function getById($id)
     {
-        $query = $this->db->prepare('SELECT * FROM class WHERE id_class = ?');
-        $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $subject = DB::table('class')->where('id_class',$id)->first();
+        $result = json_decode(json_encode($subject), true);
+        return $result; 
     }
 
     /** 
@@ -53,10 +53,34 @@ class Subject {
     public function create($class)
     {
         // class
-        require 'models/Schedule.php';       
-        $id_schedule = (new Schedule())->getLastInsertId() + 1;
 
-        $query = $this->db->prepare('
+        $id_schedule = (new Schedule())->getLastInsertId();
+        $id_schedule_array = $id_schedule->toArray();
+        $new_id_schedule = $id_schedule_array[0] + 1;
+
+        var_dump($new_id_schedule);
+
+        $id_class = DB::table('class')->insertGetId(
+            ['name'=>$class['name'],
+            'color'=>$class['color'],   
+            'id_teacher'=>$class['id_teacher'],
+            'id_course'=>$class['id_course'],
+            'id_branch'=>$class['id_branch'],
+            'id_schedule'=>$new_id_schedule
+            ]
+        );
+
+        // schedule
+
+        $id_schedule = DB::table('schedule')->insertGetId(
+            ['id_class'=>$id_class,
+            'time_start'=>$class['time_start'],
+            'time_end'=>$class['time_end'],
+            'day'=>$class['day']
+            ]
+        );
+
+        /*$query = $this->db->prepare('
             INSERT INTO class (name, color, id_teacher, id_course, id_branch)
             VALUES (?, ?, ?, ?, ?)
          ');
@@ -67,9 +91,9 @@ class Subject {
             $class['id_course'],
             $class['id_branch'],
         ]);
-        $id_class = $this->db->lastInsertId();                            
+        $id_class = $this->db->lastInsertId();*/                            
         
-        $query = $this->db->prepare('
+        /*$query = $this->db->prepare('
             INSERT INTO schedule (id_class, time_start, time_end, day)
             VALUES (?, ?, ?, ?)
          ');
@@ -80,7 +104,7 @@ class Subject {
              $class['day'],
          ]);        
 
-        return $id_class;
+        return $id_class;*/
     }
 
     /**
@@ -88,13 +112,18 @@ class Subject {
      */
     public function edit($subject)
     {
-        $query = $this->db->prepare('
+        $subject = DB::table('class')->where('id_class',$subject['id_class'])->update(
+            ['name'=>$subject['name'],
+            'color'=>$subject['color']
+            ]
+        );
+        /*$query = $this->db->prepare('
             UPDATE class SET name=?, color=? WHERE id_class = ? LIMIT 1');
         $query->execute([
             $subject['name'], 
             $subject['color'],            
             $subject['id_class'],
-        ]);            
+        ]);*/            
     }
 
     /**
@@ -103,11 +132,9 @@ class Subject {
     public function delete($id)
     {
         // Eliminamos los horarios asociados a la clase
-        $query = $this->db->prepare('DELETE FROM schedule WHERE id_class = ?');
-        $query->execute([$id]); 
+        DB::table('schedule')->where('id_class','=',$id)->delete();
         // Eliminamos la clase
-        $query = $this->db->prepare('DELETE FROM class WHERE id_class = ?');
-        $query->execute([$id]);                 
+        DB::table('class')->where('id_class','=',$id)->delete();               
     }
 
 }

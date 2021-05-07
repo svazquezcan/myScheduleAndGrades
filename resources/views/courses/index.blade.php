@@ -4,7 +4,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Cursos</h1>
-    <a class="btn btn-primary" href="index.php?controller=course&action=create"><i class="fas fa-plus"></i> Crear</a>
+    <a class="btn btn-primary" href="courses/create"><i class="fas fa-plus"></i> Crear</a>
 </div>
 
 <!-- Datatable -->
@@ -41,14 +41,14 @@
                             <td>
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="index.php?controller=course&action=edit&id=<?php echo $course['id_course'] ?>"
+                                    href="courses/edit?id=<?php echo $course['id_course'] ?>"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a
                                     class="btn btn-sm btn-danger"
                                     onclick="return confirm('Se va a eliminar el registro. ¿Estás seguro?')"
-                                    href="index.php?controller=course&action=delete&id=<?php echo $course['id_course'] ?>"
+                                    href="courses/delete?id=<?php echo $course['id_course'] ?>"
                                     title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </a>

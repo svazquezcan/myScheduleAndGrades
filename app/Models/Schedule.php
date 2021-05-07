@@ -27,9 +27,13 @@ class Schedule {
 
     public function getLastInsertId()
     {
-        $lastInsertId = $this->db->lastInsertId();
 
-        return $lastInsertId;
+        $lastScheduleId = DB::table('class')
+                                ->orderBy('id_schedule')
+                                ->limit(1)
+                                ->pluck('id_schedule');
+
+        return $lastScheduleId;
     }
 
     /**
@@ -68,8 +72,13 @@ class Schedule {
     public function create($schedule)
     {
         // schedule
-        $query = $this->db->prepare('
-        INSERT INTO schedule (id_class, time_start, time_end, day)
+        $id_schedule = DB::table('schedule')->insertGetId(  //since the table has an auto-incrementing id, use the insertGetId method to insert a record and then retrieve the ID:
+            ['id_class' =>$schedule['id_class'],
+            'time_start' =>$schedule['time_start'],
+            'time_end'=>$schedule['time_end'],
+            'day'=>$schedule['day']
+        ]);
+        /*INSERT INTO schedule (id_class, time_start, time_end, day)
         VALUES (?, ?, ?, ?)
         ');
         $query->execute([ 
@@ -78,7 +87,7 @@ class Schedule {
             $schedule['time_end'],
             $schedule['day'],
         ]);
-        $id_schedule = $this->db->lastInsertId();                  
+        $id_schedule = $this->db->lastInsertId();*/
 
         return $id_schedule;
     }

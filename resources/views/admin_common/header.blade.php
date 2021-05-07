@@ -50,7 +50,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("dashboard") ? "active" : "" }}">
-                    <a class="nav-link" href="dashboard">
+                    <a class="nav-link" href="/dashboard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -58,7 +58,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("adminIndex") ? "active" : "" }}">
-                    <a class="nav-link" href="admins">
+                    <a class="nav-link" href="/admins">
                         <i class="fas fa-fw fa-user-cog"></i>
                         <span>Administradores</span></a>
                 </li>
@@ -66,7 +66,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("studentIndex") ? "active" : "" }}">
-                    <a class="nav-link" href="students">
+                    <a class="nav-link" href="/students">
                         <i class="fas fa-fw fa-user-graduate"></i>
                         <span>Estudiantes</span></a>
                 </li>
@@ -74,7 +74,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("courses") ? "active" : "" }}">
-                    <a class="nav-link" href="courses">
+                    <a class="nav-link" href="/courses">
                         <i class="fas fa-fw fa-chalkboard"></i>
                         <span>Cursos</span></a>
                 </li>
@@ -82,7 +82,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("classes") ? "active" : "" }}">
-                    <a class="nav-link" href="subjects">
+                    <a class="nav-link" href="/subjects">
                         <i class="fas fa-fw fa-book-open"></i>
                         <span>Asignaturas</span></a>
                 </li>
@@ -90,7 +90,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("teachers") ? "active" : "" }}">
-                    <a class="nav-link" href="teachers">
+                    <a class="nav-link" href="/teachers">
                         <i class="fas fa-fw fa-user-tie"></i>
                         <span>Profesores</span></a>
                 </li>
@@ -98,7 +98,7 @@
                 <li class="
                     nav-item
                     "{{ Request::is("branches") ? "active" : "" }}">
-                    <a class="nav-link" href="branches">
+                    <a class="nav-link" href="/branches">
                         <i class="fas fa-fw fa-code-branch"></i>
                         <span>Ramas</span></a>
                 </li>
@@ -106,19 +106,19 @@
                 <li class="
                     nav-item
                     "{{ Request::is("schedules") ? "active" : "" }}">
-                    <a class="nav-link" href="schedules">
+                    <a class="nav-link" href="/schedules">
                         <i class="fas fa-fw fa-calendar-alt"></i>
                         <span>Horarios</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("adminProfile") ? "active" : "" }}">
+                    "{{ Request::is("admins/profile") ? "active" : "" }}">
                     <a class="nav-link"
                         @if ($_SESSION['role'] == 'admin')
-                            href="admin/edit=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                            href="/admins/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
                         @else
-                            href="student/edit=<?php echo $_SESSION['user']['id'] ?>"
+                            href="/students/edit?id=<?php echo $_SESSION['user']['id'] ?>"
                         @endif
                     >
                         <i class="fas fa-fw fa-user-edit"></i>
@@ -171,9 +171,9 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item"
                                     @if ($_SESSION['role'] == 'admin')
-                                        href="index.php?controller=admin&action=edit&id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                                        href="admins/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
                                     @else
-                                        href="index.php?controller=student&action=edit&id=<?php echo $_SESSION['user']['id'] ?>"
+                                        href="students/edit?id=<?php echo $_SESSION['user']['id'] ?>"
                                     @endif
                                 >
                                     <i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>

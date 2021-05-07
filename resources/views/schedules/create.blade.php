@@ -1,4 +1,5 @@
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+@include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -12,14 +13,14 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="index.php?controller=schedule&action=create">
-
+            <form class="user" method="post" action="create">
+            @csrf
             <div class="form-group">
                     <label for="exampleFormControlSelect2">Asignatura:</label>
                     <select required class="form-control" name="id_class">
-                        <?php while ($subject = $subjects->fetch(PDO::FETCH_ASSOC)) : ?>
+                    @foreach ($subjects as $subject)
                             <option value="<?php echo $subject['id_class'] ?>"><?php echo $subject['name'] ?></option>
-                        <?php endwhile; ?>
+                    @endforeach
                     </select>
                 </div>
 
@@ -47,4 +48,5 @@
     </div>
 </div>
 
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>
+@include ('admin_common/footer')
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

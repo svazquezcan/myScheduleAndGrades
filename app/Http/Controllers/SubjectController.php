@@ -37,7 +37,7 @@ class SubjectController extends Controller
         //Security::adminRequired();
         if ($_POST) {
             (new Subject())->create($_POST);            
-            header('Location: index.php?controller=subject');
+            return redirect()->route('classes');
         }
         $vars['teachers'] = (new Teacher())->getAll();
         $vars['courses'] = (new Course())->getAll();
@@ -53,7 +53,7 @@ class SubjectController extends Controller
     {
         if ($_POST) {
             (new Subject())->edit($_POST);
-            header('Location: index.php?controller=subject');
+            return redirect()->route('classes');
         }
         $vars['subject'] = (new Subject())->getById($_GET['id']);
         return view('subjects/edit', $vars);
@@ -67,7 +67,7 @@ class SubjectController extends Controller
         //Security::adminRequired();
         if($_GET) {
             (new Subject())->delete($_GET['id']);
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            return redirect()->route('classes');
         }
     }
 }

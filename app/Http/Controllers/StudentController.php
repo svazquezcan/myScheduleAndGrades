@@ -54,11 +54,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if ($_POST) {
-            require 'models/Student.php';
             (new Student())->create($_POST);
-            header('Location: index.php?controller=student');
+            return redirect()->route('studentIndex');
         }
         $vars['courses'] = (new Course())->getAll();
         return view('students/create', $vars);
@@ -74,7 +73,7 @@ class StudentController extends Controller
         }*/
         if ($_POST) {
             (new Student())->edit($_POST);
-            header('Location: index.php?controller=student');
+            return redirect()->route('studentIndex');
         }
         $vars['student'] = (new Student())->getById($_GET['id']);
         $vars['courses'] = (new Course())->getAll();
@@ -86,8 +85,7 @@ class StudentController extends Controller
      */
     public function delete()
     {
-        Security::adminRequired();
         (new Student())->delete($_GET['id']);
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        return redirect()->route('studentIndex');
     }
 }

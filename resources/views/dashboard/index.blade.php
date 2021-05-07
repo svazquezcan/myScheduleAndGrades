@@ -19,7 +19,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            <a href="index.php?controller=admin">Administradores</a></div>
+                            <a href="/admins">Administradores</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalAdmins ?></div>
                     </div>
                     <div class="col-auto">
@@ -37,7 +37,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <a href="index.php?controller=student">Estudiantes</a></div>
+                            <a href="/students">Estudiantes</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalStudents ?></div>
                     </div>
                     <div class="col-auto">
@@ -55,7 +55,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            <a href="index.php?controller=course">Cursos</a></div>
+                            <a href="/courses">Cursos</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalCourses ?></div>
                     </div>
                     <div class="col-auto">
@@ -73,7 +73,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            <a href="index.php?controller=subject">Asignaturas</a></div>
+                            <a href="/subjects">Asignaturas</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalSubjects ?></div>
                     </div>
                     <div class="col-auto">
@@ -91,7 +91,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            <a href="index.php?controller=teacher">Profesores</a></div>
+                            <a href="/teachers">Profesores</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalTeachers ?></div>
                     </div>
                     <div class="col-auto">
@@ -109,7 +109,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <a href="index.php?controller=branch">Ramas</a></div>
+                            <a href="/branches">Ramas</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalBranches ?></div>
                     </div>
                     <div class="col-auto">
@@ -127,7 +127,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            <a href="index.php?controller=schedule">Horarios</a></div>
+                            <a href="/schedules">Horarios</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalSchedules ?></div>
                     </div>
                     <div class="col-auto">

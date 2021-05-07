@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Iluminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 /**
  * Modelo para los administradores.
  */
@@ -64,14 +66,22 @@ class Admin {
      */
     public function create($admin)
     {
-        $query = $this->db->prepare('INSERT INTO users_admin (username, name, email, password) VALUES (?, ?, ?, ?)');
+        $adminPass = Hash::make($admin['password']);
+        $id_admin = DB::table('users_admin')->insertGetId(
+            ['username'=>$admin['username'],
+            'name'=>$admin['name'],
+            'email'=>$admin['email'],
+            'password'=>$adminPass]
+        );      
+        /*INSERT INTO users_admin (username, name, email, password) VALUES (?, ?, ?, ?)');
         $query->execute([
             $admin['username'],
             $admin['name'],
             $admin['email'],
             password_hash($admin['password'], PASSWORD_DEFAULT)
         ]);
-        return $this->db->lastInsertId();
+        return $this->db->lastInsertId();*/
+        return $id_admin;
     }
 
     /**
@@ -80,13 +90,19 @@ class Admin {
     public function edit($admin)
     {
         if($admin['password']) {
-            $query = $this->db->prepare('UPDATE users_admin SET username=?,name=?,email=?,password=? WHERE id_user_admin = ? LIMIT 1');
-            $query->execute([$admin['username'], $admin['name'], $admin['email'], 
-                password_hash($admin['password'], PASSWORD_DEFAULT), $admin['id']
-            ]);
+            $adminPass = Hash::make($admin['password']);
+            DB::table('users_admin')->where('id_user_admin',$admin['id'])->update(
+                ['username'=>$admin['username'],
+                'name'=>$admin['name'],
+                'email'=>$admin['email'],
+                'password'=>$adminPass]
+            );
         } else {
-            $query = $this->db->prepare('UPDATE users_admin SET username=?,name=?,email=? WHERE id_user_admin = ? LIMIT 1');
-            $query->execute([$admin['username'], $admin['name'], $admin['email'], $admin['id']]);
+            DB::table('users_admin')->where('id_user_admin',$admin['id'])->update(
+                ['username'=>$admin['username'],
+                'name'=>$admin['name'],
+                'email'=>$admin['email']]  
+            );              
         }        
     }
 
@@ -95,7 +111,6 @@ class Admin {
      */
     public function delete($id)
     {
-        $query = $this->db->prepare('DELETE FROM users_admin WHERE id_user_admin = ?');
-        $query->execute([$id]);
+        DB::table('users_admin')->where('id_user_admin','=',$id)->delete();
     }
 }

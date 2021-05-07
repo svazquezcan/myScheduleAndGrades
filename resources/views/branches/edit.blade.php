@@ -13,6 +13,8 @@
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
             <form class="user" method="post" action="index.php?controller=branch&action=edit">
+            @csrf
+
                 <input type="hidden" name="id_branch" value="<?php echo $branch['id_branch'] ?>"/>
 
                 <div class="form-group">

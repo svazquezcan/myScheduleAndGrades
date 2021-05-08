@@ -58,8 +58,6 @@ class Subject {
         $id_schedule_array = $id_schedule->toArray();
         $new_id_schedule = $id_schedule_array[0] + 1;
 
-        var_dump($new_id_schedule);
-
         $id_class = DB::table('class')->insertGetId(
             ['name'=>$class['name'],
             'color'=>$class['color'],   

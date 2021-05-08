@@ -22,19 +22,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($subjects as $subject) 
-                    @foreach ($teachers as $teacher) 
-                    @foreach($courses as $course)
+                    @foreach ($subjects as $subject)
                         <tr>
                             <td><?php echo $subject['id_class'] ?></td>
                             <td><?php echo $subject['name'] ?></td>  
+
                             <td>
-                                <?php echo $teacher['name'] ?>
-                                <?php echo $teacher['surname'] ?>                                                                                    
+                                <?php echo $subject['teacher_name'] ?>
+                                <?php echo $subject['teacher_surname'] ?>                                                                                    
                             </td>
+
                             <td>
-                                <?php echo $course['name'] ?>  
-                            </td>                                                                                  
+                                <?php echo $subject['course_name'] ?>  
+                            </td>   
                             <td>
                                 <a
                                     class="btn btn-sm btn-primary"
@@ -51,10 +51,7 @@
                                 </a>
                             </td>
                         </tr>
-                        @endforeach           
-                        @endforeach                  
-                        @endforeach                  
-
+                    @endforeach
                 </tbody>
             </table>
         </div>

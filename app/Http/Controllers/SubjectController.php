@@ -22,11 +22,25 @@ class SubjectController extends Controller
     public function index()
     {
         //Security::adminRequired();
-        $vars['subjects'] = (new Subject())->getAll();
-        $vars['teachers'] = (new Teacher())->getAll();        
-        $vars['courses'] = (new Course())->getAll();
+        $subjects = (new Subject())->getAll();
+        $teachers = (new Teacher())->getAll();        
+        $courses = (new Course())->getAll();
+        $var['subjects'] = array();
 
-        return view('subjects/index', $vars);
+        $lengthSubjects = count($subjects);
+
+        for ($i = 0; $i < $lengthSubjects; $i++) {
+            $subject = $subjects[$i];
+            $course = (new Course())->getById($subjects[$i]['id_course']);
+            $teacher = (new Teacher())->getById($subjects[$i]['id_teacher']);
+            $subject['teacher_name'] = $teacher['name'];
+            $subject['teacher_surname'] = $teacher['surname'];
+            $subject['course_name'] = $course['name'];
+            array_push($var['subjects'],$subject);
+
+        }   
+        
+        return view('subjects/index', $var);
     }
 
     /**

@@ -53,7 +53,7 @@ class Teacher {
      */
     public function getById($id)
     {
-        $teacher = DB::table('teachers')->where('id_teacher',$id);
+        $teacher = DB::table('teachers')->where('id_teacher',$id)->first();
         //$query->execute([$id]);
         $result = json_decode(json_encode($teacher), true);
         return $result;

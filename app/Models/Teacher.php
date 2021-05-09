@@ -76,28 +76,31 @@ class Teacher {
    public function create($teacher)
    {
        // Teacher
-       $query = $this->db->prepare('
-           INSERT INTO teachers (name, surname, telephone, nif, email)
-           VALUES (?, ?, ?, ?, ?)
-        ');
-       $query->execute([           
-           $teacher['name'],
-           $teacher['surname'],
-           $teacher['telephone'],
-           $teacher['nif'],
-           $teacher['email'],
-       ]);
-       $id_teacher = $this->db->lastInsertId();       
-
-       return $id_teacher;
+       $id_teacher = DB::table('teachers')->insertGetId(
+        ['name'=>$teacher['name'],
+        'surname'=>$teacher['surname'],   
+        'telephone'=>$teacher['telephone'],
+        'nif'=>$teacher['nif'],
+        'email'=>$teacher['email'],
+        ]
+    );    
    }
 
    /**
      * Actualizar profesor.
      */
-    public function edit($subject)
-    {        
-        $query = $this->db->prepare('UPDATE teachers SET name=?,surname=?,telephone=?,nif=?,email=? WHERE id_teacher = ? LIMIT 1');
+    public function edit($teacher)
+    {     
+        
+        $teacher = DB::table('teachers')->where('id_teacher',$teacher['id_teacher'])->update(
+            ['name'=>$teacher['name'],
+            'surname'=>$teacher['surname'],                 
+            'telephone'=>$teacher['telephone'],
+            'nif'=>$teacher['nif'],
+            'email'=>$teacher['email'],
+            ]
+        );
+        /*$query = $this->db->prepare('UPDATE teachers SET name=?,surname=?,telephone=?,nif=?,email=? WHERE id_teacher = ? LIMIT 1');
         $query->execute([
             $subject['name'],
             $subject['surname'],                 
@@ -105,7 +108,7 @@ class Teacher {
             $subject['nif'],
             $subject['email'],     
             $subject['id_teacher']
-        ]);
+        ]);*/
     }
 
    /**
@@ -113,8 +116,8 @@ class Teacher {
      */
     public function delete($id)
     {
-        $query = $this->db->prepare('DELETE FROM teachers WHERE id_teacher = ?');
-        $query->execute([$id]);       
+        DB::table('teachers')->where('id_teacher','=',$id)->delete();
+    
     }
 
 }

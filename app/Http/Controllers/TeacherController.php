@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
+use App\Models\Teacher;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Controlador para los profesores.
@@ -17,8 +19,8 @@ class TeacherController
      */
     public function index()
     {
-        Security::adminRequired();
-        require 'models/Teacher.php';
+        //Security::adminRequired();
+        //require 'models/Teacher.php';
         $vars['teachers'] = (new Teacher())->getAll();
         return view('teachers/index', $vars);
     }
@@ -28,11 +30,11 @@ class TeacherController
      */
     public function create()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if ($_POST) {
-            require 'models/Teacher.php';
+            //require 'models/Teacher.php';
             (new Teacher())->create($_POST);
-            header('Location: index.php?controller=teacher');
+            return redirect()->route('teachers');
         }
         return view('teachers/create');
     }
@@ -42,15 +44,15 @@ class TeacherController
      */
     public function edit()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
 
-        require 'models/Teacher.php';
+        //require 'models/Teacher.php';
         if ($_POST) {
             (new Teacher())->edit($_POST);
-            header('Location: index.php?controller=teacher');
+            return redirect()->route('teachers');
         }
         $vars['teacher'] = (new Teacher())->getById($_GET['id']);        
-        return view('teachers/edit.php', $vars);
+        return view('teachers/edit', $vars);
     }
 
     /**
@@ -58,11 +60,11 @@ class TeacherController
      */
     public function delete()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if ($_GET) {
-            require 'models/Teacher.php';
+            //require 'models/Teacher.php';
             (new Teacher())->delete($_GET['id']);
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            return redirect()->route('teachers');
         }
         
     }

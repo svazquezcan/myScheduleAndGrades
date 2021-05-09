@@ -1,4 +1,5 @@
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
+@include ('admin_common/header')
 
 <?php if ($_SESSION['role'] == 'admin'): ?>
 
@@ -6,7 +7,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
         <a href="index.php?controller=teacher">Profesores</a>
-        <small> > Editar</small>
+        <small>  Editar</small>
     </h1>
 </div>
 
@@ -16,9 +17,9 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="index.php?controller=teacher&action=edit">
+            <form class="user" method="post" action="edit">
             @csrf
-v
+
                 <input type="hidden" name="id_teacher" value="<?php echo $teacher['id_teacher'] ?>" />                
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -49,5 +50,5 @@ v
         </div>
     </div>
 </div>
-
-<?php include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>
+@include ('admin_common/footer')
+<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

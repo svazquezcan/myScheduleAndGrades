@@ -58,6 +58,9 @@ Route::get ('subjects/delete', 'SubjectController@delete')->name('subjectDelete'
 //teacherControllers
 
 Route::get ('teachers', 'TeacherController@index')->name('teachers');
+Route::match(['get', 'post'], 'teachers/create', 'TeacherController@create')->name('teacherCreate');
+Route::match(['get', 'post'], 'teachers/edit', 'TeacherController@edit')->name('teacherProfile');
+Route::get ('teachers/delete', 'TeacherController@delete')->name('teacherDelete');
 
 //branchesControllers
 

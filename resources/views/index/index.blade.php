@@ -8,13 +8,13 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Icon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 
     <!-- Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -48,7 +48,7 @@
     <!-- Masthead-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-            <img class="masthead-avatar mb-5" src="assets/img/welcome.png" alt="" />
+            <img class="masthead-avatar mb-5" src="{{ asset('img/welcome.png') }}" alt="" />
             <h1 class="masthead-heading text-uppercase mb-0">Bienvenid@</h1>
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
@@ -75,7 +75,7 @@
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/features/feature1.png" alt="..." />
+                        <img class="img-fluid" src="{{ asset('img/features/feature1.png') }}" alt="..." />
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/features/feature2.png" alt="..." />
+                        <img class="img-fluid" src="{{ asset('img/features/feature2.png') }}" alt="..." />
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/features/feature3.png" alt="..." />
+                        <img class="img-fluid" src="{{ asset('img/features/feature3.png') }}" alt="..." />
                     </div>
                 </div>
 
@@ -102,7 +102,7 @@
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/features/feature4.png" alt="..." />
+                        <img class="img-fluid" src="{{ asset('img/features/feature4.png') }}" alt="..." />
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/features/feature5.png" alt="..." />
+                        <img class="img-fluid" src="{{ asset('img/features/feature5.png') }}" alt="..." />
                     </div>
                 </div>
 
@@ -120,13 +120,13 @@
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                             <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
-                        <img class="img-fluid" src="assets/img/features/feature6.png" alt="..." />
+                        <img class="img-fluid" src="{{ asset('img/features/feature6.png') }}" alt="..." />
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-5">
-                <a class="btn btn-xl btn-outline-secondary" href="https://github.com/jnavarroorti/myschedule" target="_blank">
+                <a class="btn btn-xl btn-outline-secondary" href="https://github.com/svazquezcan/myScheduleAndGrades" target="_blank">
                     <i class="fab fa-github mr-2"></i>
                     Repositorio del proyecto
                 </a>
@@ -381,7 +381,7 @@
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"></script>
 
     <!-- Scripts -->
-    <script src="assets/js/scripts.js"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 
 </html>

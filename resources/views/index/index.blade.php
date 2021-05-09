@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MYSCHEDULE</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Icon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -26,25 +26,19 @@
                 <div class="logo-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
-                MYSCHEDULE
+                {{ config('app.name') }}
             </a>
-            <button
-                class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
-                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menú
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']): ?>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="index.php?controller=user&action=logout">Cerrar sesión</a></li>
-                    <?php else: ?>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                                href="user/login">Iniciar sesión</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                                href="user/register">Crear una cuenta</a></li>
+                    <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) : ?>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="index.php?controller=user&action=logout">Cerrar sesión</a></li>
+                    <?php else : ?>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="user/login">Iniciar sesión</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="user/register">Crear una cuenta</a></li>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -79,8 +73,7 @@
                 <div class="col-md-6 col-lg-4 mb-5">
                     <div class="features-item mx-auto" data-toggle="modal" data-target="#featuresModal1">
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="features-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" src="assets/img/features/feature1.png" alt="..." />
                     </div>
@@ -89,8 +82,7 @@
                 <div class="col-md-6 col-lg-4 mb-5">
                     <div class="features-item mx-auto" data-toggle="modal" data-target="#featuresModal2">
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="features-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" src="assets/img/features/feature2.png" alt="..." />
                     </div>
@@ -99,8 +91,7 @@
                 <div class="col-md-6 col-lg-4 mb-5">
                     <div class="features-item mx-auto" data-toggle="modal" data-target="#featuresModal3">
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="features-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" src="assets/img/features/feature3.png" alt="..." />
                     </div>
@@ -109,8 +100,7 @@
                 <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
                     <div class="features-item mx-auto" data-toggle="modal" data-target="#featuresModal4">
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="features-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" src="assets/img/features/feature4.png" alt="..." />
                     </div>
@@ -119,8 +109,7 @@
                 <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
                     <div class="features-item mx-auto" data-toggle="modal" data-target="#featuresModal5">
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="features-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" src="assets/img/features/feature5.png" alt="..." />
                     </div>
@@ -129,8 +118,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="features-item mx-auto" data-toggle="modal" data-target="#featuresModal6">
                         <div class="features-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="features-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
+                            <div class="features-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
                         <img class="img-fluid" src="assets/img/features/feature6.png" alt="..." />
                     </div>
@@ -179,15 +167,13 @@
 
     <!-- Scroll to Top Button (Mobile)-->
     <div class="scroll-to-top d-lg-none position-fixed">
-        <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
-                class="fa fa-chevron-up"></i></a>
+        <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
     </div>
 
     <!-- Modals-->
 
     <!-- Modal 1-->
-    <div class="features-modal modal fade" id="featuresModal1" tabindex="-1" role="dialog"
-        aria-labelledby="featuresModal1Label" aria-hidden="true">
+    <div class="features-modal modal fade" id="featuresModal1" tabindex="-1" role="dialog" aria-labelledby="featuresModal1Label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -197,8 +183,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <h2 class="features-modal-title text-secondary text-uppercase mb-0"
-                                    id="featuresModal1Label">Horarios</h2>
+                                <h2 class="features-modal-title text-secondary text-uppercase mb-0" id="featuresModal1Label">Horarios</h2>
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -221,8 +206,7 @@
     </div>
 
     <!-- Modal 2-->
-    <div class="features-modal modal fade" id="featuresModal2" tabindex="-1" role="dialog"
-        aria-labelledby="featuresModal2Label" aria-hidden="true">
+    <div class="features-modal modal fade" id="featuresModal2" tabindex="-1" role="dialog" aria-labelledby="featuresModal2Label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -232,8 +216,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <h2 class="features-modal-title text-secondary text-uppercase mb-0"
-                                    id="featuresModal2Label">Roles de usuarios</h2>
+                                <h2 class="features-modal-title text-secondary text-uppercase mb-0" id="featuresModal2Label">Roles de usuarios</h2>
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -257,8 +240,7 @@
     </div>
 
     <!-- Modal 3-->
-    <div class="features-modal modal fade" id="featuresModal3" tabindex="-1" role="dialog"
-        aria-labelledby="featuresModal3Label" aria-hidden="true">
+    <div class="features-modal modal fade" id="featuresModal3" tabindex="-1" role="dialog" aria-labelledby="featuresModal3Label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -268,8 +250,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <h2 class="features-modal-title text-secondary text-uppercase mb-0"
-                                    id="featuresModal3Label">Cursos</h2>
+                                <h2 class="features-modal-title text-secondary text-uppercase mb-0" id="featuresModal3Label">Cursos</h2>
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -291,8 +272,7 @@
     </div>
 
     <!-- Modal 4-->
-    <div class="features-modal modal fade" id="featuresModal4" tabindex="-1" role="dialog"
-        aria-labelledby="featuresModal4Label" aria-hidden="true">
+    <div class="features-modal modal fade" id="featuresModal4" tabindex="-1" role="dialog" aria-labelledby="featuresModal4Label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -302,8 +282,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <h2 class="features-modal-title text-secondary text-uppercase mb-0"
-                                    id="featuresModal4Label">Asignaturas</h2>
+                                <h2 class="features-modal-title text-secondary text-uppercase mb-0" id="featuresModal4Label">Asignaturas</h2>
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -326,8 +305,7 @@
     </div>
 
     <!-- Modal 5-->
-    <div class="features-modal modal fade" id="featuresModal5" tabindex="-1" role="dialog"
-        aria-labelledby="featuresModal5Label" aria-hidden="true">
+    <div class="features-modal modal fade" id="featuresModal5" tabindex="-1" role="dialog" aria-labelledby="featuresModal5Label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -337,8 +315,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <h2 class="features-modal-title text-secondary text-uppercase mb-0"
-                                    id="featuresModal5Label">Profesores</h2>
+                                <h2 class="features-modal-title text-secondary text-uppercase mb-0" id="featuresModal5Label">Profesores</h2>
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
@@ -361,8 +338,7 @@
     </div>
 
     <!-- Modal 6-->
-    <div class="features-modal modal fade" id="featuresModal6" tabindex="-1" role="dialog"
-        aria-labelledby="featuresModal6Label" aria-hidden="true">
+    <div class="features-modal modal fade" id="featuresModal6" tabindex="-1" role="dialog" aria-labelledby="featuresModal6Label" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -372,8 +348,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-8">
-                                <h2 class="features-modal-title text-secondary text-uppercase mb-0"
-                                    id="featuresModal6Label">Ramas</h2>
+                                <h2 class="features-modal-title text-secondary text-uppercase mb-0" id="featuresModal6Label">Ramas</h2>
                                 <div class="divider-custom">
                                     <div class="divider-custom-line"></div>
                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>

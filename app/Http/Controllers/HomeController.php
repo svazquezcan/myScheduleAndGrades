@@ -4,7 +4,7 @@
  */
 namespace App\Http\Controllers;
 
-class IndexController
+class HomeController
 {
 
     /**
@@ -12,6 +12,6 @@ class IndexController
      */
     public function index()
     {
-        return view('index/index');
+        return view('home/index');
     }
 }

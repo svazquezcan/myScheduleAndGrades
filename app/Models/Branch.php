@@ -41,9 +41,9 @@ class Branch {
      */
     public function getAllNames()
     {
-        $query = $this->db->prepare('SELECT name FROM branches');
-        $query->execute();
-        return $query;
+        $branches = DB::table('branches')->pluck('name');
+        $result = json_decode(json_encode($branches), true);
+        return $result;
     }
 
     /**
@@ -51,9 +51,10 @@ class Branch {
      */
     public function getById($id)
     {
-        $query = $this->db->prepare('SELECT * FROM branches WHERE id_branch = ?');
-        $query->execute([$id]);
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $branch = DB::table('branches')->where('id_branch',$id)->first();
+        //$query->execute([$id]);
+        $result = json_decode(json_encode($branch), true);
+        return $result;
     }
 
      /**
@@ -62,7 +63,11 @@ class Branch {
    public function create($branch)
    {
        // Branch
-       $query = $this->db->prepare('
+       $id_course = DB::table('branches')->insertGetId(
+        ['name'=>$branch['name']]
+    );     
+
+       /*$query = $this->db->prepare('
            INSERT INTO branches (name)
            VALUES (?)
         ');
@@ -71,7 +76,7 @@ class Branch {
        ]);
        $id_branch = $this->db->lastInsertId();       
 
-       return $id_branch;
+       return $id_branch;*/
    }
 
    /**
@@ -79,8 +84,11 @@ class Branch {
      */
     public function edit($branch)
     {
-        $query = $this->db->prepare('UPDATE branches SET name=? WHERE id_branch = ? LIMIT 1');
-        $query->execute([$branch['name'], $branch['id_branch']]);            
+        DB::table('branches')->where('id_branch',$branch['id_branch'])->update(
+            ['name'=>$branch['name']]
+        );
+        /*$query = $this->db->prepare('UPDATE branches SET name=? WHERE id_branch = ? LIMIT 1');
+        $query->execute([$branch['name'], $branch['id_branch']]);*/            
     }
 
    /**
@@ -88,10 +96,8 @@ class Branch {
      */
     public function delete($id)
     {
-        $query = $this->db->prepare('DELETE FROM branches WHERE id_branch = ?');
-        $query->execute([$id]);
-        $query = $this->db->prepare('DELETE FROM class WHERE id_branch = ?');
-        $query->execute([$id]);
+        DB::table('branches')->where('id_branch','=',$id)->delete();
+        DB::table('class')->where('id_branch','=',$id)->delete();
     }
    
 }

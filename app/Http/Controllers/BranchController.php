@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-require 'libs/Security.php';
-
+use App\Models\Branch;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 /**
  * Controlador para las ramas.
  */
 
-class BranchController
+class BranchController extends Controller
 {
     /**
      * Muestra el listado de ramas.
      */
     public function index()
     {
-        require 'models/Branch.php';
         $vars['branches'] = (new Branch())->getAll();
         return view('branches/index', $vars);
     }
@@ -25,13 +25,11 @@ class BranchController
      */
     public function create()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if ($_POST) {
-            require 'models/Branch.php';
             (new Branch())->create($_POST);
-            header('Location: index.php?controller=branch');
+            return redirect()->route('branches');
         }
-        require 'models/Branch.php';
         $vars['branches'] = (new Branch())->getAll();
         return view('branches/create', $vars);
     }
@@ -41,10 +39,9 @@ class BranchController
      */
     public function edit()
     {
-        require 'models/Branch.php';
         if ($_POST) {
             (new Branch())->edit($_POST);
-            header('Location: index.php?controller=branch');
+            return redirect()->route('branches');
         }
         $vars['branch'] = (new Branch())->getById($_GET['id']);
         return view('branches/edit', $vars);
@@ -55,11 +52,10 @@ class BranchController
      */
     public function delete()
     {
-        Security::adminRequired();
+        //Security::adminRequired();
         if($_GET) {
-            require 'models/Branch.php';
             (new Branch())->delete($_GET['id']);
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            return redirect()->route('branches');
         }
     }
 

@@ -4,7 +4,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Ramas</h1>
-    <a class="btn btn-primary" href="index.php?controller=branch&action=create"><i class="fas fa-plus"></i> Crear</a>
+    <a class="btn btn-primary" href="branches/create"><i class="fas fa-plus"></i> Crear</a>
 </div>
 
 <!-- Datatable -->
@@ -20,27 +20,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while($branch = $branches->fetch(PDO::FETCH_ASSOC)): ?>
+                    @foreach($branches as $branch)
                         <tr>
                             <td><?php echo $branch['id_branch'] ?></td>
                             <td><?php echo $branch['name'] ?></td>                            
                             <td>
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="index.php?controller=branch&action=edit&id=<?php echo $branch['id_branch'] ?>"
+                                    href="branches/edit?id=<?php echo $branch['id_branch'] ?>"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a
                                     class="btn btn-sm btn-danger"
                                     onclick="return confirm('Se va a eliminar el registro. ¿Estás seguro?')"
-                                    href="index.php?controller=branch&action=delete&id=<?php echo $branch['id_branch'] ?>"
+                                    href="branches/delete?id=<?php echo $branch['id_branch'] ?>"
                                     title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
-                    <?php endwhile; ?>
+                    @endforeach
                   
                 </tbody>
             </table>

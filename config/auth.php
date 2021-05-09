@@ -70,19 +70,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'students' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Student::class,
-        ],
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
 
-        'users' => [
-            'driver' => 'database',
-            'table' => 'users_admin',
-        ],
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*

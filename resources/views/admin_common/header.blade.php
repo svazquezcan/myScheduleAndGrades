@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MYSCHEDULE</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Icon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 
     <!-- Fonts -->
-    <link href="../assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/vendor/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="../assets/admin/css/styles.css" rel="stylesheet">
-    <link href="../assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" rel="stylesheet">
 </head>
 
@@ -30,7 +30,7 @@
 
             <!-- Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-            <?php session_start(); echo $_SESSION['role']; ?>
+            <?php echo $_SESSION['role']; ?>
                 @if ($_SESSION['role'] == 'admin')
                     href="index.php?controller=dashboard"
                 @else
@@ -40,7 +40,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">MYSCHEDULE</div>
+                <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
             </a>
 
             <!-- Divider -->
@@ -165,7 +165,7 @@
                                         <small>(estudiante)</small>
                                     @endif
                                 </span>
-                                <img class="img-profile rounded-circle" src="../assets/admin/img/user.svg">
+                                <img class="img-profile rounded-circle" src="{{ asset('admin/img/user.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -180,7 +180,7 @@
                                     Perfil
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.php?controller=user&action=logout">
+                                <a class="dropdown-item" href="{{ route('logout') }}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
                                 </a>

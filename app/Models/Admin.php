@@ -2,28 +2,20 @@
 
 namespace App\Models;
 
-use Iluminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 /**
  * Modelo para los administradores.
  */
-class Admin {
-    protected $db;
- 
-    /*public function __construct()
-    {
-        $this->db = SPDO::singleton();
-    }*/
-
+class Admin
+{
     /**
      * Obtener el número total de administradores.
      */
     public function getTotal()
     {
         $query = DB::table('users_admin')->count();
-        //$query->execute();
         return $query;
     }
 
@@ -32,11 +24,9 @@ class Admin {
      */
     public function getByUsername($username)
     {
-        $user = DB::table('users_admin')->where('username',$username)->first();
-        //$query->execute([$username]);
+        $user = DB::table('users_admin')->where('username', $username)->first();
         $result = json_decode(json_encode($user), true);
         return $result;
-        //return $query->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -44,12 +34,11 @@ class Admin {
      */
     public function getById($id)
     {
-        $admin = DB::table('users_admin')->where('id_user_admin',$id)->first();
-        //$query->execute([$id]);
+        $admin = DB::table('users_admin')->where('id_user_admin', $id)->first();
         $result = json_decode(json_encode($admin), true);
         return $result;
     }
- 
+
     /**
      * Listado de administradores.
      */
@@ -57,7 +46,6 @@ class Admin {
     {
         $admins = DB::table('users_admin')->get();
         $result = json_decode(json_encode($admins), true);
-        //$query->execute();
         return $result;
     }
 
@@ -68,19 +56,13 @@ class Admin {
     {
         $adminPass = Hash::make($admin['password']);
         $id_admin = DB::table('users_admin')->insertGetId(
-            ['username'=>$admin['username'],
-            'name'=>$admin['name'],
-            'email'=>$admin['email'],
-            'password'=>$adminPass]
-        );      
-        /*INSERT INTO users_admin (username, name, email, password) VALUES (?, ?, ?, ?)');
-        $query->execute([
-            $admin['username'],
-            $admin['name'],
-            $admin['email'],
-            password_hash($admin['password'], PASSWORD_DEFAULT)
-        ]);
-        return $this->db->lastInsertId();*/
+            [
+                'username' => $admin['username'],
+                'name' => $admin['name'],
+                'email' => $admin['email'],
+                'password' => $adminPass
+            ]
+        );
         return $id_admin;
     }
 
@@ -89,21 +71,25 @@ class Admin {
      */
     public function edit($admin)
     {
-        if($admin['password']) {
+        if ($admin['password']) {
             $adminPass = Hash::make($admin['password']);
-            DB::table('users_admin')->where('id_user_admin',$admin['id'])->update(
-                ['username'=>$admin['username'],
-                'name'=>$admin['name'],
-                'email'=>$admin['email'],
-                'password'=>$adminPass]
+            DB::table('users_admin')->where('id_user_admin', $admin['id'])->update(
+                [
+                    'username' => $admin['username'],
+                    'name' => $admin['name'],
+                    'email' => $admin['email'],
+                    'password' => $adminPass
+                ]
             );
         } else {
-            DB::table('users_admin')->where('id_user_admin',$admin['id'])->update(
-                ['username'=>$admin['username'],
-                'name'=>$admin['name'],
-                'email'=>$admin['email']]  
-            );              
-        }        
+            DB::table('users_admin')->where('id_user_admin', $admin['id'])->update(
+                [
+                    'username' => $admin['username'],
+                    'name' => $admin['name'],
+                    'email' => $admin['email']
+                ]
+            );
+        }
     }
 
     /**
@@ -111,6 +97,6 @@ class Admin {
      */
     public function delete($id)
     {
-        DB::table('users_admin')->where('id_user_admin','=',$id)->delete();
+        DB::table('users_admin')->where('id_user_admin', '=', $id)->delete();
     }
 }

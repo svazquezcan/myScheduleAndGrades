@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MYSCHEDULE</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Icon -->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.ico') }}">
 
     <!-- Fonts -->
-    <link href="../../assets/admin/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/vendor/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="../../assets/admin/css/styles.css" rel="stylesheet">
-    <link href="../../assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-primary">
@@ -55,7 +55,7 @@
                                     <?php endif; ?>
 
                                     <form class="user" method="post" action="login">
-                                    @csrf
+                                        @csrf
                                         <div class="form-group">
                                             <input required type="text" class="form-control form-control-user" id="username" name="username" aria-describedby="username" placeholder="Nombre de usuario">
                                         </div>
@@ -68,7 +68,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="index.php?controller=student&action=signup">Crear cuenta de estudiante</a>
+                                        <a class="small" href="{{ route('student.signup') }}">Crear cuenta de estudiante</a>
                                     </div>
                                 </div>
                             </div>
@@ -87,12 +87,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins -->
-    <script src="../../assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../../assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Scripts -->
-    <script src="../../assets/admin/js/scripts.js"></script>
+    <script src="{{ asset('admin/js/scripts.js') }}"></script>
 
 </body>
 

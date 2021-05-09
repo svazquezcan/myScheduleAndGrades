@@ -30,15 +30,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugins -->
-    <script src="assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="assets/admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="assets/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
     <!-- Scripts -->
-    <script src="assets/admin/js/scripts.js"></script>
+    <script src="{{ asset('admin/js/scripts.js') }}"></script>
 </body>
 
 </html>

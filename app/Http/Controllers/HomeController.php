@@ -1,10 +1,13 @@
 <?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+
 /**
  * Controlador para la página de inicio.
  */
-namespace App\Http\Controllers;
-
-class HomeController
+class HomeController extends Controller
 {
 
     /**

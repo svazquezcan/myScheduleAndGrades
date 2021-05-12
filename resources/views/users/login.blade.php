@@ -40,8 +40,9 @@
 
                                     <p>
                                         <small>
-                                            Nota para el consultor. Facilitamos dos cuentas de acceso:<br>
+                                            Nota para el consultor. Facilitamos tres cuentas de acceso:<br>
                                             - Acceso como <strong>administrador</strong>: bmulleras / 1234<br>
+                                            - Acceso como <strong>profesor</strong>: juan / 1234<br>
                                             - Acceso como <strong>estudiante</strong>: maria / 1234
                                         </small>
                                     </p>

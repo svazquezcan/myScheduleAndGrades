@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Modelo para los estudiantes.
@@ -65,11 +64,10 @@ class Student
     public function create($student)
     {
         // Student
-        $studentPass = Hash::make($student['password']);
         $id_student = DB::table('students')->insertGetId(
             [
                 'username' => $student['username'],
-                'password' => $studentPass,
+                'password' => password_hash($student['password'], PASSWORD_DEFAULT),
                 'email' => $student['email'],
                 'name' => $student['name'],
                 'surname' => $student['surname'],
@@ -99,11 +97,10 @@ class Student
     public function edit($student)
     {
         if ($student['password']) {
-            $studentPass = Hash::make($student['password']);
             $student = DB::table('students')->where('id', $student['id'])->update(
                 [
                     'username' => $student['username'],
-                    'password' => $studentPass,
+                    'password' => password_hash($student['password'], PASSWORD_DEFAULT),
                     'email' => $student['email'],
                     'name' => $student['name'],
                     'surname' => $student['surname'],

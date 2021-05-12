@@ -35,14 +35,14 @@
                             <td>
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="teachers/edit?id=<?php echo $teacher['id_teacher'] ?>"
+                                    href="teacher/edit?id=<?php echo $teacher['id_teacher'] ?>"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a
                                     class="btn btn-sm btn-danger"
                                     onclick="return confirm('Se va a eliminar el registro. ¿Estás seguro?')"
-                                    href="teachers/delete?id=<?php echo $teacher['id_teacher'] ?>"
+                                    href="teacher/delete?id=<?php echo $teacher['id_teacher'] ?>"
                                     title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </a>

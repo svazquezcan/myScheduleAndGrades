@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use Libs\Security;
+use App\Models\Teacher;
 
 /**
  * Controlador para los profesores.
  */
-
-
-class TeacherController
+class TeacherController extends Controller
 {
-
     /**
      * Muestra el listado de profesores.
      */
     public function index()
     {
-        //Security::adminRequired();
-        //require 'models/Teacher.php';
+        Security::adminRequired();
         $vars['teachers'] = (new Teacher())->getAll();
         return view('teachers/index', $vars);
     }
@@ -30,11 +26,10 @@ class TeacherController
      */
     public function create()
     {
-        //Security::adminRequired();
+        Security::adminRequired();
         if ($_POST) {
-            //require 'models/Teacher.php';
             (new Teacher())->create($_POST);
-            return redirect()->route('teachers');
+            return redirect()->route('teacher.index');
         }
         return view('teachers/create');
     }
@@ -44,14 +39,12 @@ class TeacherController
      */
     public function edit()
     {
-        //Security::adminRequired();
-
-        //require 'models/Teacher.php';
+        Security::adminRequired();
         if ($_POST) {
             (new Teacher())->edit($_POST);
-            return redirect()->route('teachers');
+            return redirect()->route('teacher.index');
         }
-        $vars['teacher'] = (new Teacher())->getById($_GET['id']);        
+        $vars['teacher'] = (new Teacher())->getById($_GET['id']);
         return view('teachers/edit', $vars);
     }
 
@@ -60,13 +53,10 @@ class TeacherController
      */
     public function delete()
     {
-        //Security::adminRequired();
+        Security::adminRequired();
         if ($_GET) {
-            //require 'models/Teacher.php';
             (new Teacher())->delete($_GET['id']);
-            return redirect()->route('teachers');
+            return redirect()->route('teacher.index');
         }
-        
     }
-   
 }

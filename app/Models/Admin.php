@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Modelo para los administradores.
@@ -54,13 +53,12 @@ class Admin
      */
     public function create($admin)
     {
-        $adminPass = Hash::make($admin['password']);
         $id_admin = DB::table('users_admin')->insertGetId(
             [
                 'username' => $admin['username'],
                 'name' => $admin['name'],
                 'email' => $admin['email'],
-                'password' => $adminPass
+                'password' => password_hash($admin['password'], PASSWORD_DEFAULT),
             ]
         );
         return $id_admin;
@@ -72,13 +70,12 @@ class Admin
     public function edit($admin)
     {
         if ($admin['password']) {
-            $adminPass = Hash::make($admin['password']);
             DB::table('users_admin')->where('id_user_admin', $admin['id'])->update(
                 [
                     'username' => $admin['username'],
                     'name' => $admin['name'],
                     'email' => $admin['email'],
-                    'password' => $adminPass
+                    'password' => password_hash($admin['password'], PASSWORD_DEFAULT),
                 ]
             );
         } else {

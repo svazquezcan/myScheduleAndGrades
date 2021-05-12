@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
  */
 class HomeController extends Controller
 {
-
     /**
      * Muestra la página de inicio.
      */

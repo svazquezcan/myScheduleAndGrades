@@ -13,6 +13,16 @@ use App\Models\Student;
 class UserController extends Controller
 {
     /**
+     * Configurar sesión de usuario.
+     */
+    private function setSession($user, $role) {
+        session_regenerate_id();
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['user'] = $user;
+        $_SESSION['role'] = $role;
+    }
+
+    /**
      * Login de usuario.
      */
     public function login()
@@ -21,28 +31,32 @@ class UserController extends Controller
             $admin = (new Admin())->getByUsername($_POST['username']);
             if ($admin) {
                 if (password_verify($_POST['password'], $admin['password'])) {
-                    session_regenerate_id();
-                    $_SESSION['loggedIn'] = true;
-                    $_SESSION['user'] = $admin;
-                    $_SESSION['role'] = 'admin';
-                    return redirect()->route('dashboard');
+                    $this->setSession($admin, 'admin');
+                    return redirect()->route('dashboard.index');
                 } else {
                     return redirect()->route('login', ['credentials' => 'wrong']);
                 }
             } else {
-                $student = (new Student())->getByUsername($_POST['username']);
-                if ($student) {
-                    if (password_verify($_POST['password'], $student['password'])) {
-                        session_regenerate_id();
-                        $_SESSION['loggedIn'] = true;
-                        $_SESSION['user'] = $student;
-                        $_SESSION['role'] = 'student';
-                        return redirect()->route('schedule');
+                $teacher = (new Teacher())->getByUsername($_POST['username']);
+                if ($teacher) {
+                    if (password_verify($_POST['password'], $teacher['password'])) {
+                        $this->setSession($teacher, 'teacher');
+                        return redirect()->route('dashboard.index');
                     } else {
                         return redirect()->route('login', ['credentials' => 'wrong']);
                     }
                 } else {
-                    return redirect()->route('login', ['credentials' => 'wrong']);
+                    $student = (new Student())->getByUsername($_POST['username']);
+                    if ($student) {
+                        if (password_verify($_POST['password'], $student['password'])) {
+                            $this->setSession($student, 'student');
+                            return redirect()->route('schedule.index');
+                        } else {
+                            return redirect()->route('login', ['credentials' => 'wrong']);
+                        }
+                    } else {
+                        return redirect()->route('login', ['credentials' => 'wrong']);
+                    }
                 }
             }
         }

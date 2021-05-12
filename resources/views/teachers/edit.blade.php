@@ -1,4 +1,3 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
 
 <?php if ($_SESSION['role'] == 'admin'): ?>
@@ -6,8 +5,8 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="index.php?controller=teacher">Profesores</a>
-        <small>  Editar</small>
+        <a href="{{ route('teacher.index') }}">Profesores</a>
+        <small> > Editar</small>
     </h1>
 </div>
 
@@ -18,9 +17,18 @@
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
             <form class="user" method="post" action="edit">
-            @csrf
+                @csrf
+                <input type="hidden" name="id_teacher" value="<?php echo $teacher['id_teacher'] ?>" />
+                
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input value="<?php echo $teacher['username'] ?>" required type="text" maxlength="20" class="form-control form-control-user" name="username" placeholder="Nombre de usuario">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="password" minlength="4" maxlength="8" class="form-control form-control-user" name="password" placeholder="Contraseña">
+                    </div>
+                </div>
 
-                <input type="hidden" name="id_teacher" value="<?php echo $teacher['id_teacher'] ?>" />                
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input value="<?php echo $teacher['name'] ?>"  required type="text" maxlength="20" class="form-control form-control-user" name="name" placeholder="Nombre">
@@ -51,4 +59,3 @@
     </div>
 </div>
 @include ('admin_common/footer')
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

@@ -32,9 +32,9 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
             <?php echo $_SESSION['role']; ?>
                 @if ($_SESSION['role'] == 'admin')
-                    href="index.php?controller=dashboard"
+                    href="{{ route('dashboard.index') }}"
                 @else
-                    href="index.php?controller=schedule"
+                    href="{{ route('schedule.index') }}"
                 @endif
             >
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -49,76 +49,76 @@
 
                 <li class="
                     nav-item
-                    "{{ Request::is("dashboard") ? "active" : "" }}">
-                    <a class="nav-link" href="/dashboard">
+                    {{ Request::is('dashboard') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('dashboard.index') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("adminIndex") ? "active" : "" }}">
-                    <a class="nav-link" href="/admins">
+                    {{ Request::is('admin') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.index') }}">
                         <i class="fas fa-fw fa-user-cog"></i>
                         <span>Administradores</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("studentIndex") ? "active" : "" }}">
-                    <a class="nav-link" href="/students">
+                    {{ Request::is('student') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('student.index') }}">
                         <i class="fas fa-fw fa-user-graduate"></i>
                         <span>Estudiantes</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("courses") ? "active" : "" }}">
-                    <a class="nav-link" href="/courses">
+                    {{ Request::is('course') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('course.index') }}">
                         <i class="fas fa-fw fa-chalkboard"></i>
                         <span>Cursos</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("classes") ? "active" : "" }}">
-                    <a class="nav-link" href="/subjects">
+                    {{ Request::is('subject') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('subject.index') }}">
                         <i class="fas fa-fw fa-book-open"></i>
                         <span>Asignaturas</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("teachers") ? "active" : "" }}">
-                    <a class="nav-link" href="/teachers">
+                    {{ Request::is('teacher') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('teacher.index') }}">
                         <i class="fas fa-fw fa-user-tie"></i>
                         <span>Profesores</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("branches") ? "active" : "" }}">
-                    <a class="nav-link" href="/branches">
+                    {{ Request::is('branch') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('branch.index') }}">
                         <i class="fas fa-fw fa-code-branch"></i>
                         <span>Ramas</span></a>
                 </li>
             
                 <li class="
                     nav-item
-                    "{{ Request::is("schedules") ? "active" : "" }}">
-                    <a class="nav-link" href="/schedules">
+                    {{ Request::is('schedule') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('schedule.index') }}">
                         <i class="fas fa-fw fa-calendar-alt"></i>
                         <span>Horarios</span></a>
                 </li>
 
                 <li class="
                     nav-item
-                    "{{ Request::is("admins/profile") ? "active" : "" }}">
+                    {{ Request::is('administrator/profile') ? 'active' : '' }}">
                     <a class="nav-link"
                         @if ($_SESSION['role'] == 'admin')
-                            href="/admins/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                            href="/administrator/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
                         @else
-                            href="/students/edit?id=<?php echo $_SESSION['user']['id'] ?>"
+                            href="/student/edit?id=<?php echo $_SESSION['user']['id'] ?>"
                         @endif
                     >
                         <i class="fas fa-fw fa-user-edit"></i>
@@ -161,6 +161,8 @@
                                     <?php echo $_SESSION['user']['username'] ?>
                                     @if ($_SESSION['role'] == 'admin')
                                         <small>(administrador)</small>
+                                    @elseif ($_SESSION['role'] == 'teacher')
+                                        <small>(profesor)</small>
                                     @else
                                         <small>(estudiante)</small>
                                     @endif
@@ -171,9 +173,11 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item"
                                     @if ($_SESSION['role'] == 'admin')
-                                        href="admins/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                                        href="administrator/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                                    @elseif ($_SESSION['role'] == 'teacher')
+                                        href="teacher/edit?id=<?php echo $_SESSION['user']['id_teacher'] ?>"
                                     @else
-                                        href="students/edit?id=<?php echo $_SESSION['user']['id'] ?>"
+                                        href="student/edit?id=<?php echo $_SESSION['user']['id'] ?>"
                                     @endif
                                 >
                                     <i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>

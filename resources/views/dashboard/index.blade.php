@@ -9,7 +9,20 @@
 <div class="row">
 
     <div class="col-12">
-        <p>Bienvenid@ <?php echo $_SESSION['user']['name'] ?>, eres un administrador. Podrás gestionar todos las secciones.</p>
+        <p>
+            Bienvenid@ <?php echo $_SESSION['user']['name'] ?>, eres un
+            @switch($_SESSION['role'])
+                @case('admin')
+                    administrador. Podrás gestionar todos las secciones.
+                @break
+                @case('teacher')
+                    profesor. Podrás modificar las asignaturas que impartes.
+                @break
+                @default
+                    estudiante.
+            @endswitch
+            
+        </p>
     </div>
 
     <!-- Administradores -->

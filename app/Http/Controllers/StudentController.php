@@ -17,7 +17,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        Security::adminRequired();
+        Security::mustBe(['admin']);
         $vars['students'] = (new Student())->getAll();
         return view('students/index', $vars);
     }
@@ -40,10 +40,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        Security::adminRequired();
+        Security::mustBe(['admin']);
         if ($_POST) {
             (new Student())->create($_POST);
-            return redirect()->route('student');
+            return redirect()->route('student.index');
         }
         $vars['courses'] = (new Course())->getAll();
         return view('students/create', $vars);
@@ -55,11 +55,11 @@ class StudentController extends Controller
     public function edit()
     {
         if (!($_SESSION['role'] == 'student' && $_SESSION['user']['id'] == $_GET['id'])) {
-            Security::adminRequired();
+            Security::mustBe(['admin']);
         }
         if ($_POST) {
             (new Student())->edit($_POST);
-            return redirect()->route('student');
+            return redirect()->route('student.index');
         }
         $vars['student'] = (new Student())->getById($_GET['id']);
         $vars['courses'] = (new Course())->getAll();
@@ -71,8 +71,8 @@ class StudentController extends Controller
      */
     public function delete()
     {
-        Security::adminRequired();
+        Security::mustBe(['admin']);
         (new Student())->delete($_GET['id']);
-        return redirect()->route('student');
+        return redirect()->route('student.index');
     }
 }

@@ -14,8 +14,7 @@ class Student
      */
     public function getTotal()
     {
-        $query = DB::table('students')->count();
-        return $query;
+        return DB::table('students')->count();
     }
 
     /**
@@ -24,8 +23,7 @@ class Student
     public function getByUsername($username)
     {
         $user = DB::table('students')->where('username', $username)->first();
-        $result = json_decode(json_encode($user), true);
-        return $result;
+        return json_decode(json_encode($user), true);
     }
 
     /**
@@ -34,8 +32,7 @@ class Student
     public function getById($id)
     {
         $student = DB::table('students')->where('id', $id)->first();
-        $result = json_decode(json_encode($student), true);
-        return $result;
+        return json_decode(json_encode($student), true);
     }
 
     /**
@@ -44,8 +41,7 @@ class Student
     public function getIdCourses($id)
     {
         $courses = DB::table('enrollment')->pluck('id_course')->where('id_student', $id);
-        $result = json_decode(json_encode($courses), true);
-        return $result;
+        return json_decode(json_encode($courses), true);
     }
 
     /**
@@ -54,8 +50,7 @@ class Student
     public function getAll()
     {
         $students = DB::table('students')->get();
-        $result = json_decode(json_encode($students), true);
-        return $result;
+        return json_decode(json_encode($students), true);
     }
 
     /**
@@ -64,8 +59,7 @@ class Student
     public function create($student)
     {
         // Student
-        $id_student = DB::table('students')->insertGetId(
-            [
+        $id_student = DB::table('students')->insertGetId([
                 'username' => $student['username'],
                 'password' => password_hash($student['password'], PASSWORD_DEFAULT),
                 'email' => $student['email'],
@@ -74,18 +68,15 @@ class Student
                 'telephone' => $student['telephone'],
                 'nif' => $student['nif'],
                 'date_registered' => NOW()
-            ]
-        );
+        ]);
 
         // Enrollment
         foreach ($_POST['id_courses'] as $id_course) {
-            $enrollment = DB::table('enrollment')->insertGetId(
-                [
-                    'id_student' => $id_student,
-                    'id_course' => $id_course,
-                    'status' => 1
-                ]
-            );
+            $enrollment = DB::table('enrollment')->insertGetId([
+                'id_student' => $id_student,
+                'id_course' => $id_course,
+                'status' => 1
+            ]);
         }
 
         return $id_student;
@@ -96,30 +87,18 @@ class Student
      */
     public function edit($student)
     {
+        $values = [
+            'username' => $student['username'],
+            'email' => $student['email'],
+            'name' => $student['name'],
+            'surname' => $student['surname'],
+            'telephone' => $student['telephone'],
+            'nif' => $student['nif'],
+        ];
         if ($student['password']) {
-            $student = DB::table('students')->where('id', $student['id'])->update(
-                [
-                    'username' => $student['username'],
-                    'password' => password_hash($student['password'], PASSWORD_DEFAULT),
-                    'email' => $student['email'],
-                    'name' => $student['name'],
-                    'surname' => $student['surname'],
-                    'telephone' => $student['telephone'],
-                    'nif' => $student['nif'],
-                ]
-            );
-        } else {
-            $student = DB::table('students')->where('id', $student['id'])->update(
-                [
-                    'username' => $student['username'],
-                    'email' => $student['email'],
-                    'name' => $student['name'],
-                    'surname' => $student['surname'],
-                    'telephone' => $student['telephone'],
-                    'nif' => $student['nif'],
-                ]
-            );
+            $values['password'] = password_hash($student['password'], PASSWORD_DEFAULT);
         }
+        $student = DB::table('students')->where('id', $student['id'])->update($values);
     }
 
     /**

@@ -33,6 +33,8 @@
             <?php echo $_SESSION['role']; ?>
                 @if ($_SESSION['role'] == 'admin')
                     href="{{ route('dashboard.index') }}"
+                @elseif($_SESSION['role'] == 'teacher')
+                    href="{{ route('subject.index') }}"
                 @else
                     href="{{ route('schedule.index') }}"
                 @endif
@@ -46,7 +48,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             @if ($_SESSION['role'] == 'admin')
-
                 <li class="
                     nav-item
                     {{ Request::is('dashboard') ? 'active' : '' }}">
@@ -57,7 +58,7 @@
 
                 <li class="
                     nav-item
-                    {{ Request::is('admin') ? 'active' : '' }}">
+                    {{ Request::is('administrator') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('admin.index') }}">
                         <i class="fas fa-fw fa-user-cog"></i>
                         <span>Administradores</span></a>
@@ -78,7 +79,9 @@
                         <i class="fas fa-fw fa-chalkboard"></i>
                         <span>Cursos</span></a>
                 </li>
+            @endif
 
+            @if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'teacher')
                 <li class="
                     nav-item
                     {{ Request::is('subject') ? 'active' : '' }}">
@@ -86,7 +89,9 @@
                         <i class="fas fa-fw fa-book-open"></i>
                         <span>Asignaturas</span></a>
                 </li>
+            @endif
 
+            @if ($_SESSION['role'] == 'admin')
                 <li class="
                     nav-item
                     {{ Request::is('teacher') ? 'active' : '' }}">
@@ -102,7 +107,9 @@
                         <i class="fas fa-fw fa-code-branch"></i>
                         <span>Ramas</span></a>
                 </li>
+            @endif
             
+            @if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'student')
                 <li class="
                     nav-item
                     {{ Request::is('schedule') ? 'active' : '' }}">
@@ -110,22 +117,23 @@
                         <i class="fas fa-fw fa-calendar-alt"></i>
                         <span>Horarios</span></a>
                 </li>
+            @endif
 
                 <li class="
                     nav-item
                     {{ Request::is('administrator/profile') ? 'active' : '' }}">
                     <a class="nav-link"
                         @if ($_SESSION['role'] == 'admin')
-                            href="/administrator/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                            href="{{ route('admin.edit') }}?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                        @elseif ($_SESSION['role'] == 'teacher')
+                            href="{{ route('teacher.edit') }}?id=<?php echo $_SESSION['user']['id_teacher'] ?>"
                         @else
-                            href="/student/edit?id=<?php echo $_SESSION['user']['id'] ?>"
+                            href="{{ route('student.edit') }}?id=<?php echo $_SESSION['user']['id'] ?>"
                         @endif
                     >
                         <i class="fas fa-fw fa-user-edit"></i>
                         <span>Perfil</span></a>
                 </li>
-            
-            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -173,11 +181,11 @@
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item"
                                     @if ($_SESSION['role'] == 'admin')
-                                        href="administrator/edit?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
+                                        href="{{ route('admin.edit') }}?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
                                     @elseif ($_SESSION['role'] == 'teacher')
-                                        href="teacher/edit?id=<?php echo $_SESSION['user']['id_teacher'] ?>"
+                                        href="{{ route('teacher.edit') }}?id=<?php echo $_SESSION['user']['id_teacher'] ?>"
                                     @else
-                                        href="student/edit?id=<?php echo $_SESSION['user']['id'] ?>"
+                                        href="{{ route('student.edit') }}?id=<?php echo $_SESSION['user']['id'] ?>"
                                     @endif
                                 >
                                     <i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>

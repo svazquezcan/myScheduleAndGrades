@@ -20,7 +20,7 @@ Route::get ('/administrator/delete', 'AdminController@delete')->name('admin.dele
 
 // Student
 Route::get ('/student', 'StudentController@index')->name('student.index');
-Route::get('/student/signup', 'StudentController@signup')->name('student.signup');
+Route::match(['get', 'post'], '/student/signup', 'StudentController@signup')->name('student.signup');
 Route::match(['get', 'post'], '/student/create', 'StudentController@create')->name('student.create');
 Route::match(['get', 'post'], '/student/edit', 'StudentController@edit')->name('student.edit');
 Route::get ('/student/delete', 'StudentController@delete')->name('student.delete');

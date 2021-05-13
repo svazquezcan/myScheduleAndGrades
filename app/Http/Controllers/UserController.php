@@ -41,7 +41,7 @@ class UserController extends Controller
                 if ($teacher) {
                     if (password_verify($_POST['password'], $teacher['password'])) {
                         $this->setSession($teacher, 'teacher');
-                        return redirect()->route('dashboard.index');
+                        return redirect()->route('subject.index');
                     } else {
                         return redirect()->route('login', ['credentials' => 'wrong']);
                     }

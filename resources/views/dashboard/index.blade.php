@@ -1,5 +1,5 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
+
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -32,7 +32,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            <a href="/admins">Administradores</a></div>
+                            <a href="{{ route('admin.index') }}">Administradores</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalAdmins ?></div>
                     </div>
                     <div class="col-auto">
@@ -50,7 +50,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <a href="/students">Estudiantes</a></div>
+                            <a href="{{ route('student.index') }}">Estudiantes</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalStudents ?></div>
                     </div>
                     <div class="col-auto">
@@ -68,7 +68,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            <a href="/courses">Cursos</a></div>
+                            <a href="{{ route('course.index') }}">Cursos</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalCourses ?></div>
                     </div>
                     <div class="col-auto">
@@ -86,7 +86,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            <a href="/subjects">Asignaturas</a></div>
+                            <a href="{{ route('subject.index') }}">Asignaturas</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalSubjects ?></div>
                     </div>
                     <div class="col-auto">
@@ -104,7 +104,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            <a href="/teachers">Profesores</a></div>
+                            <a href="{{ route('teacher.index') }}">Profesores</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalTeachers ?></div>
                     </div>
                     <div class="col-auto">
@@ -122,7 +122,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <a href="/branches">Ramas</a></div>
+                            <a href="{{ route('branch.index') }}">Ramas</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalBranches ?></div>
                     </div>
                     <div class="col-auto">
@@ -140,7 +140,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            <a href="/schedules">Horarios</a></div>
+                            <a href="{{ route('schedule.index') }}">Horarios</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalSchedules ?></div>
                     </div>
                     <div class="col-auto">
@@ -154,4 +154,3 @@
 </div>
 
 @include ('admin_common/footer')
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

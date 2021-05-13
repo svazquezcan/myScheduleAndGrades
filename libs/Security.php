@@ -19,12 +19,12 @@ class Security
     }
 
     /**
-     * Acceso solo para administradores.
+     * Acceso solo para ciertos roles.
      */
-    public static function adminRequired()
+    public static function mustBe($roles)
     {
         self::loggedInRequired();
-        if ($_SESSION['role'] != 'admin') {
+        if (!in_array($_SESSION['role'], $roles)) {
             header('Location: /schedule');
             exit();
         }

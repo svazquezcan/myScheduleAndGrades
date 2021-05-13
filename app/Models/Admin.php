@@ -14,8 +14,7 @@ class Admin
      */
     public function getTotal()
     {
-        $query = DB::table('users_admin')->count();
-        return $query;
+        return DB::table('users_admin')->count();
     }
 
     /**
@@ -24,8 +23,7 @@ class Admin
     public function getByUsername($username)
     {
         $user = DB::table('users_admin')->where('username', $username)->first();
-        $result = json_decode(json_encode($user), true);
-        return $result;
+        return json_decode(json_encode($user), true);
     }
 
     /**
@@ -34,8 +32,7 @@ class Admin
     public function getById($id)
     {
         $admin = DB::table('users_admin')->where('id_user_admin', $id)->first();
-        $result = json_decode(json_encode($admin), true);
-        return $result;
+        return json_decode(json_encode($admin), true);
     }
 
     /**
@@ -44,8 +41,7 @@ class Admin
     public function getAll()
     {
         $admins = DB::table('users_admin')->get();
-        $result = json_decode(json_encode($admins), true);
-        return $result;
+        return json_decode(json_encode($admins), true);
     }
 
     /**
@@ -53,14 +49,12 @@ class Admin
      */
     public function create($admin)
     {
-        $id_admin = DB::table('users_admin')->insertGetId(
-            [
-                'username' => $admin['username'],
-                'name' => $admin['name'],
-                'email' => $admin['email'],
-                'password' => password_hash($admin['password'], PASSWORD_DEFAULT),
-            ]
-        );
+        $id_admin = DB::table('users_admin')->insertGetId([
+            'username' => $admin['username'],
+            'name' => $admin['name'],
+            'email' => $admin['email'],
+            'password' => password_hash($admin['password'], PASSWORD_DEFAULT),
+        ]);
         return $id_admin;
     }
 
@@ -69,24 +63,15 @@ class Admin
      */
     public function edit($admin)
     {
+        $values = [
+            'username' => $admin['username'],
+            'name' => $admin['name'],
+            'email' => $admin['email']
+        ];
         if ($admin['password']) {
-            DB::table('users_admin')->where('id_user_admin', $admin['id'])->update(
-                [
-                    'username' => $admin['username'],
-                    'name' => $admin['name'],
-                    'email' => $admin['email'],
-                    'password' => password_hash($admin['password'], PASSWORD_DEFAULT),
-                ]
-            );
-        } else {
-            DB::table('users_admin')->where('id_user_admin', $admin['id'])->update(
-                [
-                    'username' => $admin['username'],
-                    'name' => $admin['name'],
-                    'email' => $admin['email']
-                ]
-            );
+            $values['password'] = password_hash($admin['password'], PASSWORD_DEFAULT);
         }
+        DB::table('users_admin')->where('id_user_admin', $admin['id'])->update($values);
     }
 
     /**

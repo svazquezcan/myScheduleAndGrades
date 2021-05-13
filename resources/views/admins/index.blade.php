@@ -30,14 +30,14 @@
                             <td>
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="administrator/edit?id=<?php echo $admin['id_user_admin'] ?>"
+                                    href="{{ route('admin.edit') }}?id=<?php echo $admin['id_user_admin'] ?>"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a
                                     class="btn btn-sm btn-danger"
                                     onclick="return confirm('Se va a eliminar el registro. ¿Estás seguro?')"
-                                    href="administrator/delete?id=<?php echo $admin['id_user_admin'] ?>"
+                                    href="{{ route('admin.delete') }}?id=<?php echo $admin['id_user_admin'] ?>"
                                     title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </a>

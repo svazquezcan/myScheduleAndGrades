@@ -16,6 +16,7 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
+            <p>Nota: Si quieres conservar la contraseña, deja el campo en blanco.</p>
             <form class="user" method="post" action="{{ route('teacher.edit') }}">
                 @csrf
                 <input type="hidden" name="id_teacher" value="<?php echo $teacher['id_teacher'] ?>" />

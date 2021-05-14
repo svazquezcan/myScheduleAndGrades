@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branch;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use Libs\Security;
+use App\Models\Branch;
+
 /**
  * Controlador para las ramas.
  */
 
 class BranchController extends Controller
 {
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        Security::mustBe(['admin']);
+    }
+
     /**
      * Muestra el listado de ramas.
      */
@@ -25,10 +34,9 @@ class BranchController extends Controller
      */
     public function create()
     {
-        //Security::adminRequired();
         if ($_POST) {
             (new Branch())->create($_POST);
-            return redirect()->route('branches');
+            return redirect()->route('branch.index');
         }
         $vars['branches'] = (new Branch())->getAll();
         return view('branches/create', $vars);
@@ -41,7 +49,7 @@ class BranchController extends Controller
     {
         if ($_POST) {
             (new Branch())->edit($_POST);
-            return redirect()->route('branches');
+            return redirect()->route('branch.index');
         }
         $vars['branch'] = (new Branch())->getById($_GET['id']);
         return view('branches/edit', $vars);
@@ -52,11 +60,9 @@ class BranchController extends Controller
      */
     public function delete()
     {
-        //Security::adminRequired();
-        if($_GET) {
+        if ($_GET) {
             (new Branch())->delete($_GET['id']);
-            return redirect()->route('branches');
+            return redirect()->route('branch.index');
         }
     }
-
 }

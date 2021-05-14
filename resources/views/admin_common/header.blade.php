@@ -119,21 +119,31 @@
                 </li>
             @endif
 
-                <li class="
-                    nav-item
-                    {{ Request::is('administrator/profile') ? 'active' : '' }}">
-                    <a class="nav-link"
-                        @if ($_SESSION['role'] == 'admin')
-                            href="{{ route('admin.edit') }}?id=<?php echo $_SESSION['user']['id_user_admin'] ?>"
-                        @elseif ($_SESSION['role'] == 'teacher')
-                            href="{{ route('teacher.edit') }}?id=<?php echo $_SESSION['user']['id_teacher'] ?>"
-                        @else
-                            href="{{ route('student.edit') }}?id=<?php echo $_SESSION['user']['id'] ?>"
-                        @endif
-                    >
+            @if ($_SESSION['role'] == 'admin')
+                <li class="nav-item {{ Request::is('administrator/edit') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('admin.edit') }}?id=<?php echo $_SESSION['user']['id_user_admin'] ?>">
                         <i class="fas fa-fw fa-user-edit"></i>
                         <span>Perfil</span></a>
                 </li>
+            @endif
+
+            @if ($_SESSION['role'] == 'teacher')
+                <li class="nav-item {{ Request::is('teacher/edit') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('teacher.edit') }}?id=<?php echo $_SESSION['user']['id_teacher'] ?>">
+                        <i class="fas fa-fw fa-user-edit"></i>
+                        <span>Perfil</span></a>
+                </li>
+            @endif
+
+            @if ($_SESSION['role'] == 'student')
+                <li class="nav-item {{ Request::is('student/edit') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('student.edit') }}?id=<?php echo $_SESSION['user']['id'] ?>">
+                        <i class="fas fa-fw fa-user-edit"></i>
+                        <span>Perfil</span></a>
+                </li>
+            @endif
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

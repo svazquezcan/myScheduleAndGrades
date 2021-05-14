@@ -1,10 +1,9 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Ramas</h1>
-    <a class="btn btn-primary" href="branches/create"><i class="fas fa-plus"></i> Crear</a>
+    <a class="btn btn-primary" href="{{ route('branch.create') }}"><i class="fas fa-plus"></i> Crear</a>
 </div>
 
 <!-- Datatable -->
@@ -27,14 +26,14 @@
                             <td>
                                 <a
                                     class="btn btn-sm btn-primary"
-                                    href="branches/edit?id=<?php echo $branch['id_branch'] ?>"
+                                    href="{{ route('branch.edit') }}?id=<?php echo $branch['id_branch'] ?>"
                                     title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a
                                     class="btn btn-sm btn-danger"
                                     onclick="return confirm('Se va a eliminar el registro. ¿Estás seguro?')"
-                                    href="branches/delete?id=<?php echo $branch['id_branch'] ?>"
+                                    href="{{ route('branch.delete') }}?id=<?php echo $branch['id_branch'] ?>"
                                     title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -49,4 +48,3 @@
 </div>
 
 @include ('admin_common/footer')
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

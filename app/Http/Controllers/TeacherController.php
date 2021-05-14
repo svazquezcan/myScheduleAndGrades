@@ -16,7 +16,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        Security::adminRequired();
+        Security::mustBe(['admin']);
         $vars['teachers'] = (new Teacher())->getAll();
         return view('teachers/index', $vars);
     }
@@ -26,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        Security::adminRequired();
+        Security::mustBe(['admin']);
         if ($_POST) {
             (new Teacher())->create($_POST);
             return redirect()->route('teacher.index');
@@ -39,7 +39,9 @@ class TeacherController extends Controller
      */
     public function edit()
     {
-        Security::adminRequired();
+        if (!($_SESSION['role'] == 'teacher' && $_SESSION['user']['id_teacher'] == $_GET['id'])) {
+            Security::mustBe(['admin']);
+        }
         if ($_POST) {
             (new Teacher())->edit($_POST);
             return redirect()->route('teacher.index');
@@ -53,7 +55,7 @@ class TeacherController extends Controller
      */
     public function delete()
     {
-        Security::adminRequired();
+        Security::mustBe(['admin']);
         if ($_GET) {
             (new Teacher())->delete($_GET['id']);
             return redirect()->route('teacher.index');

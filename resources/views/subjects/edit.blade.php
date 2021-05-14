@@ -1,10 +1,9 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="subjects">Asignatura</a>
+        <a href="{{ route('subject.index') }}">Asignatura</a>
         <small> > Editar</small>
     </h1>
 </div>
@@ -33,4 +32,3 @@
     </div>
 </div>
 @include ('admin_common/footer')
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

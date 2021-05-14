@@ -1,10 +1,9 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="teachers">Profesores</a>
+        <a href="{{ route('teacher.index') }}">Profesores</a>
         <small> > Crear</small>
     </h1>
 </div>
@@ -15,6 +14,15 @@
         <div class="card-body">
             <form class="user" method="post" action="{{ route('teacher.create') }}">  
                 @csrf
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <input required type="text" maxlength="20" class="form-control form-control-user" name="username" placeholder="Nombre de usuario">
+                    </div>
+                    <div class="col-sm-6">
+                        <input required type="password" minlength="4" maxlength="8" class="form-control form-control-user" name="password" placeholder="Contraseña">
+                    </div>
+                </div>
+                
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input required type="text" maxlength="20" class="form-control form-control-user" name="name" placeholder="Nombre">
@@ -45,5 +53,3 @@
     </div>
 </div>
 @include ('admin_common/footer')
-
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

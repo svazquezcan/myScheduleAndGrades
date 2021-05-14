@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Libs\Security;
 use App\Models\Course;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Branch;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Controlador para las asignaturas.
@@ -15,13 +15,19 @@ use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        Security::mustBe(['admin', 'teacher']);
+    }
 
     /**
      * Muestra el listado de asignaturas.
      */
     public function index()
     {
-        //Security::adminRequired();
         $subjects = (new Subject())->getAll();
         $teachers = (new Teacher())->getAll();        
         $courses = (new Course())->getAll();
@@ -37,7 +43,6 @@ class SubjectController extends Controller
             $subject['teacher_surname'] = $teacher['surname'];
             $subject['course_name'] = $course['name'];
             array_push($var['subjects'],$subject);
-
         }   
         
         return view('subjects/index', $var);
@@ -48,10 +53,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //Security::adminRequired();
         if ($_POST) {
             (new Subject())->create($_POST);            
-            return redirect()->route('classes');
+            return redirect()->route('subject.index');
         }
         $vars['teachers'] = (new Teacher())->getAll();
         $vars['courses'] = (new Course())->getAll();
@@ -67,7 +71,7 @@ class SubjectController extends Controller
     {
         if ($_POST) {
             (new Subject())->edit($_POST);
-            return redirect()->route('classes');
+            return redirect()->route('subject.index');
         }
         $vars['subject'] = (new Subject())->getById($_GET['id']);
         return view('subjects/edit', $vars);
@@ -78,10 +82,9 @@ class SubjectController extends Controller
      */
     public function delete()
     {
-        //Security::adminRequired();
         if($_GET) {
             (new Subject())->delete($_GET['id']);
-            return redirect()->route('classes');
+            return redirect()->route('subject.index');
         }
     }
 }

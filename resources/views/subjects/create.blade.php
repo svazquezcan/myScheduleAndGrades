@@ -1,10 +1,9 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="subjects">Asignaturas</a>
+        <a href="{{ route('subject.index') }}">Asignaturas</a>
         <small> > Crear</small>
     </h1>
 </div>
@@ -23,15 +22,6 @@
                         <input required type="text" class="form-control form-control-user" name="color" placeholder="Color">
                     </div>
                 </div>
-                                
-                <!--
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <strong>Info!</strong> Mantén presionada la tecla Ctrl (windows) o Command (Mac) para seleccionar/quitar múltiples opciones
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                -->
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Profesor:</label>
@@ -44,15 +34,6 @@
                         @endforeach
                     </select>
                 </div>
-                
-                <!--
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <strong>Info!</strong> Mantén presionada la tecla Ctrl (windows) o Command (Mac) para seleccionar/quitar múltiples opciones
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                -->
 
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Curso:</label>
@@ -99,4 +80,3 @@
     </div>
 </div>
 @include ('admin_common/footer')
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

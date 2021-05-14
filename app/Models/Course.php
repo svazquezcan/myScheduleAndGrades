@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
 
-
 /**
  * Modelo para los cursos.
  */
@@ -41,13 +40,13 @@ class Course {
     */
     public function create($course)
     {
-        $id_course = DB::table('courses')->insertGetId(
-            ['name'=>$course['name'],
+        $id_course = DB::table('courses')->insertGetId([
+            'name'=>$course['name'],
             'description'=>$course['description'],
             'date_start'=>$course['date_start'],
             'date_end'=>date('Y-m-d', strtotime($course['date_start']. '+2 years')),
-            'active'=>$course['active']]
-        ); 
+            'active'=>$course['active']
+        ]); 
         return $id_course;
     }
 
@@ -61,13 +60,13 @@ class Course {
         } else if ($course['active'] == "Inactivo" || $course['active'] == "inactivo") {
             $course['active'] = 0;
         }
-        DB::table('courses')->where('id_course',$course['id_course'])->update(
-            ['name'=>$course['name'],
+        DB::table('courses')->where('id_course',$course['id_course'])->update([
+            'name'=>$course['name'],
             'description'=>$course['description'],
             'date_start'=>$course['date_start'],
             'date_end'=>date('Y-m-d', strtotime($course['date_start']. '+2 years')),
-            'active'=>$course['active']]
-        );
+            'active'=>$course['active']
+        ]);
     }
 
     /**

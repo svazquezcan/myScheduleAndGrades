@@ -18,11 +18,18 @@ use App\Models\Course;
 class DashboardController extends Controller
 {
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        Security::mustBe(['admin']);
+    }
+
+    /**
      * Muestra la página de inicio del Dashboard.
      */
     public function index()
     {
-        Security::mustBe(['admin']);
         $vars['totalAdmins'] = (new Admin())->getTotal();
         $vars['totalStudents'] = (new Student())->getTotal();
         $vars['totalCourses'] = (new Course())->getTotal();

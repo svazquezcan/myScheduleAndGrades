@@ -13,7 +13,7 @@
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
             <p>Nota: Si quieres conservar la contraseña, deja el campo en blanco.</p>
-            <form class="user" method="post" action="edit">
+            <form class="user" method="post" action="{{ route('admin.edit') }}">
                 @csrf
                 <input type="hidden" name="id" value="<?php echo $admin['id_user_admin'] ?>" />
                 <div class="form-group row">

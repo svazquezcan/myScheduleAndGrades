@@ -1,15 +1,22 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use Libs\Security;
+use App\Models\Course;
+
 /**
  * Controlador para los cursos.
  */
-
 class CourseController extends Controller
 {
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        Security::mustBe(['admin']);
+    }
 
     /**
      * Muestra el listado de cursos.
@@ -27,7 +34,7 @@ class CourseController extends Controller
     {
         if ($_POST) {
             (new Course())->create($_POST);
-            header('Location: index.php?controller=course');
+            return redirect()->route('course.index');
         }
         return view('courses/create');
     }
@@ -53,7 +60,7 @@ class CourseController extends Controller
             */
 
             (new Course())->edit($_POST);
-            return redirect()->route('courses');
+            return redirect()->route('course.index');
         }
         $vars['course'] = (new Course())->getById($_GET['id']);
         return view('courses/edit', $vars);
@@ -65,6 +72,6 @@ class CourseController extends Controller
     public function delete()
     {
         (new Course())->delete($_GET['id']);
-        return redirect()->route('courses');
+        return redirect()->route('course.index');
     }
 }

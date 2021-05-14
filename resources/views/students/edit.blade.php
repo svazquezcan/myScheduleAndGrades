@@ -17,7 +17,7 @@
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
             <p>Nota: Si quieres conservar la contraseña, deja el campo en blanco.</p>
-            <form class="user" method="post" action="edit">
+            <form class="user" method="post" action="{{ route('student.edit') }}">
                 @csrf
                 <input type="hidden" name="id" value="<?php echo $student['id'] ?>" />
                 <div class="form-group row">

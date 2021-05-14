@@ -13,9 +13,8 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="create">
-            @csrf
-
+            <form class="user" method="post" action="{{ route('subject.create') }}">
+                @csrf
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input required type="text" maxlength="50" class="form-control form-control-user" name="name" placeholder="Nombre">

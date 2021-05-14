@@ -13,7 +13,7 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="create">   
+            <form class="user" method="post" action="{{ route('branch.create') }}">   
             @csrf
 
                 <div class="form-group">

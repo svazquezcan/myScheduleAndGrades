@@ -13,9 +13,8 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="edit">
-            @csrf
-
+            <form class="user" method="post" action="{{ route('subject.edit') }}">
+                @csrf
                 <input type="hidden" name="id_class" value="<?php echo $subject['id_class'] ?>"/>
 
                 <div class="form-group">

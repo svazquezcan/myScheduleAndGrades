@@ -1,10 +1,9 @@
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'header.php') ?>
 @include ('admin_common/header')
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">
-        <a href="index.php?controller=course">Cursos</a>
+        <a href="{{ route('course.index') }}">Cursos</a>
         <small> > Editar</small>
     </h1>
 </div>
@@ -13,9 +12,8 @@
 <div class="d-flex justify-content-center">
     <div class="card shadow pt-3 pb-2">
         <div class="card-body">
-            <form class="user" method="post" action="edit">
-            @csrf
-
+            <form class="user" method="post" action="{{ route('course.edit') }}">
+                @csrf
                 <input type="hidden" name="id_course" value="<?php echo $course['id_course'] ?>" />
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -63,4 +61,3 @@
 </div>
 
 @include ('admin_common/footer')
-<?php //include(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'admin_common ' . DIRECTORY_SEPARATOR  . 'footer.php') ?>

@@ -11,11 +11,18 @@ use App\Models\Admin;
 class AdminController extends Controller
 {
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        Security::mustBe(['admin']);
+    }
+
+    /**
      * Muestra el listado de administradores.
      */
     public function index()
     {
-        Security::mustBe(['admin']);
         $vars['admins'] = (new Admin())->getAll();
         return view('admins/index', $vars);
     }
@@ -25,7 +32,6 @@ class AdminController extends Controller
      */
     public function create()
     {
-        Security::mustBe(['admin']);
         if ($_POST) {
             (new Admin())->create($_POST);
             return redirect()->route('admin.index');
@@ -38,7 +44,6 @@ class AdminController extends Controller
      */
     public function edit()
     {
-        Security::mustBe(['admin']);
         if ($_POST) {
             (new Admin())->edit($_POST);
             return redirect()->route('admin.index');
@@ -52,7 +57,6 @@ class AdminController extends Controller
      */
     public function delete()
     {
-        Security::mustBe(['admin']);
         (new Admin())->delete($_GET['id']);
         return redirect()->route('admin.index');
     }

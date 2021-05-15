@@ -28,13 +28,18 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = (new Subject())->getAll();
-        $teachers = (new Teacher())->getAll();        
-        $courses = (new Course())->getAll();
-        $var['subjects'] = array();
+        // Si se ha iniciado sesión como un profesor,
+        // solo se muestran las asignaturas que imparte el mismo.
+        if ($_SESSION['role'] == 'teacher') {
+            $subjects = (new Subject())->getAllByTeacher($_SESSION['user']['id_teacher']);
 
+            // Si no, mostramos todas las asignaturas.
+        } else {
+            $subjects = (new Subject())->getAll();
+        }
+
+        $vars['subjects'] = array();
         $lengthSubjects = count($subjects);
-
         for ($i = 0; $i < $lengthSubjects; $i++) {
             $subject = $subjects[$i];
             $course = (new Course())->getById($subjects[$i]['id_course']);
@@ -42,10 +47,9 @@ class SubjectController extends Controller
             $subject['teacher_name'] = $teacher['name'];
             $subject['teacher_surname'] = $teacher['surname'];
             $subject['course_name'] = $course['name'];
-            array_push($var['subjects'],$subject);
+            array_push($vars['subjects'],$subject);
         }   
-        
-        return view('subjects/index', $var);
+        return view('subjects/index', $vars);
     }
 
     /**
@@ -60,7 +64,6 @@ class SubjectController extends Controller
         $vars['teachers'] = (new Teacher())->getAll();
         $vars['courses'] = (new Course())->getAll();
         $vars['branches'] = (new Branch())->getAll();
-
         return view('subjects/create', $vars);
     }
 

@@ -26,6 +26,15 @@ class Subject {
     }
 
     /**
+     * Listado de asignaturas filtradas por profesor.
+     */
+    public function getAllByTeacher($id_teacher)
+    {
+        $subjects = DB::table('class')->where('id_teacher', $id_teacher)->get();
+        return json_decode(json_encode($subjects), true);
+    }
+
+    /**
      * Obtener una asignatura por su id.
      */
     public function getById($id)

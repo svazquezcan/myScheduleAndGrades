@@ -136,14 +136,18 @@
             @endif
 
             @if ($_SESSION['role'] == 'student')
+                <li class="nav-item {{ Request::is('record') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('record.index') }}">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Expediente</span></a>
+                </li>
+
                 <li class="nav-item {{ Request::is('student/edit') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('student.edit') }}?id=<?php echo $_SESSION['user']['id'] ?>">
                         <i class="fas fa-fw fa-user-edit"></i>
                         <span>Perfil</span></a>
                 </li>
             @endif
-
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

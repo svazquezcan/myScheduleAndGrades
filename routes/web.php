@@ -37,6 +37,9 @@ Route::match(['get', 'post'], '/subject/create', 'SubjectController@create')->na
 Route::match(['get', 'post'], '/subject/edit', 'SubjectController@edit')->name('subject.edit');
 Route::get ('/subject/delete', 'SubjectController@delete')->name('subject.delete');
 
+// Record
+Route::get ('/record', 'RecordController@index')->name('record.index');
+
 // Teacher
 Route::get ('/teacher', 'TeacherController@index')->name('teacher.index');
 Route::match(['get', 'post'], '/teacher/create', 'TeacherController@create')->name('teacher.create');

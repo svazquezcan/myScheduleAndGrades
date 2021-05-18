@@ -39,6 +39,7 @@ Route::get ('/subject/delete', 'SubjectController@delete')->name('subject.delete
 
 // Record
 Route::get ('/record', 'RecordController@index')->name('record.index');
+Route::get ('/record/subject/{id}', 'RecordController@subject')->name('record.subject');
 
 // Teacher
 Route::get ('/teacher', 'TeacherController@index')->name('teacher.index');

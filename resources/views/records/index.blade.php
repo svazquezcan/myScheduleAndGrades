@@ -18,6 +18,7 @@
                         <th>Curso</th>
                         <th>Id asignatura</th>
                         <th>Asignatura</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,7 @@
                             <td><?php echo $record['course'] ?></td>
                             <td><?php echo $record['id_class'] ?></td>
                             <td><?php echo $record['subject'] ?></td>
+                            <td><a href="{{ route('record.subject', ['id' => $record['id_class']]) }}" class="btn btn-primary btn-sm">Calificaciones</td>
                         </tr>
                     @endforeach
                 </tbody>

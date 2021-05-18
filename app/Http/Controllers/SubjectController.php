@@ -33,7 +33,7 @@ class SubjectController extends Controller
         if ($_SESSION['role'] == 'teacher') {
             $subjects = (new Subject())->getAllByTeacher($_SESSION['user']['id_teacher']);
 
-            // Si no, mostramos todas las asignaturas.
+        // Si no, mostramos todas las asignaturas.
         } else {
             $subjects = (new Subject())->getAll();
         }

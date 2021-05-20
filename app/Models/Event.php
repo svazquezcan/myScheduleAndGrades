@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Iluminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Modelo para los horarios.
@@ -12,24 +12,29 @@ class Event {
     /**
      * Obtener todos los eventos.
      */
-    public function getEvents(){
-        $data = array();
-        $query = $this->db->prepare('SELECT events.* FROM events JOIN students ON events.id_student = students.id WHERE students.id =:id_student');
-        $query->bindParam(":id_student", $id_student);
-        $id_student = (int) $_SESSION['user']['id'];
-        $query->execute();
-        $result = $query->fetchAll();    
+    public function getEvents($studentId){
+
+        $result = DB::select("
+            SELECT events.* FROM events 
+            JOIN students ON events.id_student = students.id 
+            WHERE students.id = ?
+        ", [$studentId]);
+        
+        $data = [];
+
         foreach($result as $row){
             $data[] = array(
-                'id'   => $row["id"],
-                'title'   => $row["title"],
-                'start'   => $row["start_event"],
-                'end'   => $row["end_event"],
-                'id_student' => $row["id_student"],
-                'type' =>"event"
+                'id'   => $row->id,
+                'title'   => $row->title,
+                'start'   => $row->start_event,
+                'end'   => $row->end_event,
+                'id_student' => $row->id_student,
+                'type' => "event"
             );
-        } 
-        return $data; 
+        }
+
+        return $data;
+        //return json_decode(json_encode($data), true);
 
     }
 

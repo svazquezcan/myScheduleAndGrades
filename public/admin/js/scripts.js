@@ -1,3 +1,11 @@
+$.ajaxSetup({
+    beforeSend: function(xhr, type) {
+        if (!type.crossDomain) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        }
+    },
+});
+
 (function ($) {
     "use strict"; // Start of use strict
 
@@ -86,7 +94,7 @@ $(document).ready(function () {
         eventSources: [
             // eventos personales que añade el estudiante
             {
-                url: 'index.php?controller=event&action=load',
+                url: '/event/load',
                 method: 'POST',
                 failure: function () {
                     alert('there was an error while fetching events!');
@@ -96,7 +104,7 @@ $(document).ready(function () {
             },
             // horarios oficiales de las clases del estudiante 
             {
-                url: 'index.php?controller=schedule&action=load',
+                url: '/schedule/load',
                 method: 'POST',
                 failure: function () {
                     alert('there was an error while fetching schedule!');
@@ -113,7 +121,7 @@ $(document).ready(function () {
                 var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
                 var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
                 $.ajax({
-                    url: "index.php?controller=event&action=insert",
+                    url: '/event/insert',
                     type: "POST",
                     data: {
                         title: title,
@@ -136,7 +144,7 @@ $(document).ready(function () {
             var type = event.type;
             if(type == "event"){
                 $.ajax({
-                    url: "index.php?controller=event&action=update",
+                    url: '/event/update',
                     type: "POST",
                     data: {
                         title: title,
@@ -165,7 +173,7 @@ $(document).ready(function () {
                 var id = event.id;
            
                 $.ajax({
-                    url: "index.php?controller=event&action=update",
+                    url: '/event/update',
                     type: "POST",
                     data: {
                         title: title,
@@ -194,7 +202,7 @@ $(document).ready(function () {
                     var id = event.id;
                     var type = event.type;
                     $.ajax({
-                        url: "index.php?controller=event&action=delete",
+                        url: '/event/delete',
                         type: "POST",
                         data: {
                             id: id

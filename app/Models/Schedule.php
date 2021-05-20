@@ -32,30 +32,33 @@ class Schedule {
     /**
      * Obtener todos los horarios del estudiante logueado
      */
-    public function getSchedule(){
+    public function getSchedule($studentId){
 
         // Obtenemos el id del curso en el que está enrolado el estudiante
-        $id_student = (int) $_SESSION['user']['id'];
-        $queryforId = $this->db->prepare("SELECT enrollment.id_course FROM enrollment
-        JOIN courses ON enrollment.id_course=courses.id_course WHERE enrollment.id_student = :id_student"); 
-        $queryforId->bindParam(":id_student", $id_student);
-        $queryforId->execute();
-        $id_course = $queryforId->fetchColumn(); 
+        $queryforId = DB::select("
+            SELECT enrollment.id_course FROM enrollment
+            JOIN courses ON enrollment.id_course=courses.id_course
+            WHERE enrollment.id_student = ?
+        ", [$studentId]);
+        $id_course = $queryforId[0]->id_course;
 
-        // Obtenemos los horarios de las clases del curso en el que está enrolado el estudiante que hemos obtenido con la query anterior
-        $query = $this->db->prepare('SELECT schedule.id_class AS id_class, schedule.id_schedule, schedule.time_start, schedule.time_end, schedule.day, class.name AS name FROM schedule 
-        INNER JOIN class ON schedule.id_class=class.id_class WHERE id_course = :id_course'); 
-        $query->bindParam(":id_course", $id_course);
-        $query->execute();
-        $result = $query->fetchAll();
+        // Obtenemos los horarios de las clases del curso en el que está
+        // enrolado el estudiante que hemos obtenido con la query anterior
+        $result = DB::select("
+            SELECT schedule.id_class AS id_class, schedule.id_schedule, schedule.time_start, schedule.time_end, schedule.day, class.name AS name
+            FROM schedule 
+            INNER JOIN class ON schedule.id_class=class.id_class
+            WHERE id_course = ?
+        ", [$id_course]);
+
         $data = array();
         foreach($result as $row){
             $data[] = array(
-                'id'   => $row["id_class"],
-                'title'   => $row["name"],
-                'start'   => $row["day"]." ".$row["time_start"],
-                'end'   =>$row["day"]." ".$row["time_end"],
-                'type' =>'schedule'
+                'id'   => $row->id_class,
+                'title'   => $row->name,
+                'start'   => $row->day . " " . $row->time_start,
+                'end'   =>$row->day . " " . $row->time_end,
+                'type' => 'schedule'
             );
         }
         return $data; 

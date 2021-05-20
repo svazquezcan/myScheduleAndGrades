@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Libs\Security;
 use App\Models\Event;
 
 /**
@@ -25,9 +24,8 @@ class EventController extends Controller
      */
     public function load()
     {
-        $data =  (new Event())->getEvents();
+        $data = (new Event())->getEvents($_SESSION['user']['id']);
         echo json_encode($data);
-            
     }
 
     public function delete()

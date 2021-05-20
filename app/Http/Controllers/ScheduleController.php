@@ -17,7 +17,7 @@ class ScheduleController extends Controller
      */
     public function __construct()
     {
-        Security::mustBe(['admin', 'student']);
+        Security::mustBe(['admin', 'teacher', 'student']);
     }
 
     /**
@@ -33,9 +33,8 @@ class ScheduleController extends Controller
      */
     public function load()
     {
-        $data =  (new Schedule())->getSchedule(); 
+        $data =  (new Schedule())->getSchedule($_SESSION['user']['id']); 
         echo json_encode($data);
-            
     }
     
     /**

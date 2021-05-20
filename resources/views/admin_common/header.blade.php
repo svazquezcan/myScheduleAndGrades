@@ -18,6 +18,8 @@
     <link href="{{ asset('admin/css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" rel="stylesheet">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body id="page-top">

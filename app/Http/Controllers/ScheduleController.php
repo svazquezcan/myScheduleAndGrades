@@ -33,8 +33,10 @@ class ScheduleController extends Controller
      */
     public function load()
     {
-        $data =  (new Schedule())->getSchedule($_SESSION['user']['id']); 
-        echo json_encode($data);
+        if (isset($_SESSION['user']['id'])) {
+            $data =  (new Schedule())->getSchedule($_SESSION['user']['id']); 
+            echo json_encode($data);
+        }
     }
     
     /**

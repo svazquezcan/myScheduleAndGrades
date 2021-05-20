@@ -24,8 +24,10 @@ class EventController extends Controller
      */
     public function load()
     {
-        $data = (new Event())->getEvents($_SESSION['user']['id']);
-        echo json_encode($data);
+        if (isset($_SESSION['user']['id'])) {
+            $data = (new Event())->getEvents($_SESSION['user']['id']);
+            echo json_encode($data);
+        }
     }
 
     public function delete()

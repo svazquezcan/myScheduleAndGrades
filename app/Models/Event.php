@@ -7,15 +7,9 @@ use Iluminate\Database\Eloquent\Model;
 /**
  * Modelo para los horarios.
  */
-class Event extends Model {
-    protected $db;
+class Event {
  
-    public function __construct()
-    {
-        $this->db = SPDO::singleton();
-    }
- 
-       /**
+    /**
      * Obtener todos los eventos.
      */
     public function getEvents(){
@@ -76,7 +70,6 @@ class Event extends Model {
     /**
      * Modificar evento seleccionado
      */
-
     public function updateEvents(){
         if(isset($_POST["id"])){
             $id_student = (int) $_SESSION['user']['id'];
@@ -93,5 +86,3 @@ class Event extends Model {
     }
 
 }
-
-

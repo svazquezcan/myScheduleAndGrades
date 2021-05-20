@@ -61,5 +61,33 @@
     </div>
 </div>
 
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <h4>Nota final de la asignatura</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nota media productos</th>
+                        <th>Nota media exámenes</th>
+                        <th>Valor evaluación continua (<?php echo $percentages['continuous_assessment'] ?>%)</th>
+                        <th>Valor examenes (<?php echo $percentages['exams'] ?>%)</th>
+                        <th>Nota final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $final['works']['media'] ?></td>
+                        <td><?php echo $final['exams']['media'] ?></td>
+                        <td><?php echo $final['works']['valor'] ?></td>
+                        <td><?php echo $final['exams']['valor'] ?></td>
+                        <td><?php echo $final['mark'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 @include ('admin_common/footer')

@@ -30,17 +30,17 @@ class EventController extends Controller
 
     public function delete()
     {
-        (new Event())->deleteEvents();    
+        (new Event())->deleteEvents($_SESSION['user']['id']);    
     }
     
     public function insert( )
     {
-        (new Event())->insertEvents();    
+        (new Event())->insertEvents($_SESSION['user']['id']);    
     }
 
     
     public function update()
     {
-        (new Event())->updateEvents();    
+        (new Event())->updateEvents($_SESSION['user']['id']);    
     }
 }

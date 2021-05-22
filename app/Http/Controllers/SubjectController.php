@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\Branch;
+use App\Models\Percentage;
 
 /**
  * Controlador para las asignaturas.
@@ -76,7 +77,7 @@ class SubjectController extends Controller
             (new Subject())->edit($_POST);
             return redirect()->route('subject.index');
         }
-        $vars['subject'] = (new Subject())->getById($_GET['id']);
+        $vars['subject'] = (new Subject())->getSubjectById($_GET['id']);
         return view('subjects/edit', $vars);
     }
 
@@ -98,10 +99,11 @@ class SubjectController extends Controller
     {
         Security::mustBe(['admin', 'teacher']);
 
-        $vars['subject'] = (new Subject())->getById($id);
+        $vars['subject'] = (new Subject())->getSubjectById($id);
         $vars['works'] = (new Subject())->getWorksBySubject($id);
         $vars['exams'] = (new Subject())->getExamsBySubject($id);
-        
+        $vars['percentages'] = (new Percentage())->getPercentagesBySubjectId($id);
+
         return view('subjects/works_and_exams', $vars);
     }
 }

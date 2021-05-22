@@ -37,7 +37,7 @@ class Subject {
     /**
      * Obtener una asignatura por su id.
      */
-    public function getById($id)
+    public function getSubjectById($id)
     {
         $subject = DB::table('class')->where('id_class',$id)->first();
         return json_decode(json_encode($subject), true);

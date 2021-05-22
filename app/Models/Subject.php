@@ -98,4 +98,32 @@ class Subject {
         DB::table('class')->where('id_class','=',$id)->delete();               
     }
 
+    /**
+     * Obtener los trabajos de una asignatura.
+     */
+    public function getWorksBySubject($subjectId)
+    {
+        $works = DB::select("
+            SELECT * FROM works
+            WHERE AND id_class=?
+            ORDER BY id_work;
+        ", [$subjectId]);
+
+        return json_decode(json_encode($works), true);
+    }
+
+    /**
+     * Obtener los exámenes de una asignatura.
+     */
+    public function getExamsBySubject($subjectId)
+    {
+        $exams = DB::select("
+            SELECT * FROM exams
+            WHERE AND id_class=?
+            ORDER BY id_exam;
+        ", [$subjectId]);
+
+        return json_decode(json_encode($exams), true);
+    }
+
 }

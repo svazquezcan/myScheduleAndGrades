@@ -35,6 +35,9 @@
                                 <?php echo $subject['course_name'] ?>  
                             </td>   
                             <td>
+                                <a 
+                                    href="{{ route('subject.showWorksAndExams', ['id' => $subject['id_class']]) }}" class="btn btn-primary btn-sm">Gestionar
+                                </a>
                                 <a
                                     class="btn btn-sm btn-primary"
                                     href="{{ route('subject.edit') }}?id=<?php echo $subject['id_class'] ?>"

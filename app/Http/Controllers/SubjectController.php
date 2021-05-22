@@ -90,4 +90,18 @@ class SubjectController extends Controller
             return redirect()->route('subject.index');
         }
     }
+
+    /**
+     * Muestra los trabajos y los exámenes de una asignatura
+     */
+    public function showWorksAndExams($id)
+    {
+        Security::mustBe(['admin', 'teacher']);
+
+        $vars['subject'] = (new Subject())->getById($id);
+        $vars['works'] = (new Subject())->getWorksBySubject($id);
+        $vars['exams'] = (new Subject())->getExamsBySubject($id);
+        
+        return view('subject/manage', $vars);
+    }
 }

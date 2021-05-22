@@ -105,7 +105,7 @@ class Subject {
     {
         $works = DB::select("
             SELECT * FROM works
-            WHERE AND id_class=?
+            WHERE id_class=?
             ORDER BY id_work;
         ", [$subjectId]);
 
@@ -119,7 +119,7 @@ class Subject {
     {
         $exams = DB::select("
             SELECT * FROM exams
-            WHERE AND id_class=?
+            WHERE id_class=?
             ORDER BY id_exam;
         ", [$subjectId]);
 

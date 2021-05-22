@@ -36,7 +36,7 @@ Route::get('/subject', 'SubjectController@index')->name('subject.index');
 Route::match(['get', 'post'], '/subject/create', 'SubjectController@create')->name('subject.create');
 Route::match(['get', 'post'], '/subject/edit', 'SubjectController@edit')->name('subject.edit');
 Route::get('/subject/delete', 'SubjectController@delete')->name('subject.delete');
-Route::get('/subject/manage/{id}', 'SubjectController@showWorksAndExams')->name('subject.showWorksAndExams');
+Route::get('/subject/works_and_exams/{id}', 'SubjectController@showWorksAndExams')->name('subject.showWorksAndExams');
 
 // Record
 Route::get('/record', 'RecordController@index')->name('record.index');

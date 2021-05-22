@@ -92,7 +92,7 @@ class SubjectController extends Controller
     }
 
     /**
-     * Muestra los trabajos y los exámenes de una asignatura
+     * Muestra los trabajos y los exámenes de una asignatura.
      */
     public function showWorksAndExams($id)
     {
@@ -102,6 +102,6 @@ class SubjectController extends Controller
         $vars['works'] = (new Subject())->getWorksBySubject($id);
         $vars['exams'] = (new Subject())->getExamsBySubject($id);
         
-        return view('subject/manage', $vars);
+        return view('subjects/works_and_exams', $vars);
     }
 }

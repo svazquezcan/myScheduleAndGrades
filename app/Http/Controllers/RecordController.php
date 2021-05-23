@@ -38,7 +38,7 @@ class RecordController extends Controller
         $vars['subject'] = (new Subject())->getSubjectById($id);
         $vars['works'] = (new Record())->getWorks($_SESSION['user']['id'], $id);
         $vars['exams'] = (new Record())->getExams($_SESSION['user']['id'], $id);
-        $vars['percentages'] = (new Percentage())->getPorcentagesBySubjectId($id);
+        $vars['percentages'] = (new Percentage())->getPercentagesBySubjectId($id);
         $vars['final'] = [
             'works' => ['counter' => 0, 'total' => 0],
             'exams' => ['counter' => 0, 'total' => 0]

@@ -17,7 +17,8 @@
                 <thead>
                     <tr>
                         <th>Id trabajo</th>
-                        <th>Nombre</th>
+                        <th>Nombre</th>                       
+                        <th>Estudiante</th>
                         <th>Calificación</th>
                     </tr>
                 </thead>
@@ -25,8 +26,9 @@
                     @foreach ($works as $work)
                         <tr>
                             <td><?php echo $work['id_work'] ?></td>
-                            <td><?php echo $work['name'] ?></td>
-                            <td><?php echo $work['mark'] ?></td>
+                            <td><?php echo $work['name'] ?></td>                           
+                            <td>(<?php echo $work['id_student'] ?>)  <?php echo $work['student'] ?></td>
+                            <td><?php echo $work['mark'] ?></td>                            
                         </tr>
                     @endforeach
                 </tbody>
@@ -44,6 +46,7 @@
                     <tr>
                         <th>Id examen</th>
                         <th>Nombre</th>
+                        <th>Estudiante</th>
                         <th>Calificación</th>
                     </tr>
                 </thead>
@@ -52,6 +55,7 @@
                         <tr>
                             <td><?php echo $exam['id_exam'] ?></td>
                             <td><?php echo $exam['name'] ?></td>
+                            <td>(<?php echo $exam['id_student'] ?>) <?php echo  $exam['student'] ?></td>
                             <td><?php echo $exam['mark'] ?></td>
                         </tr>
                     @endforeach

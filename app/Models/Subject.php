@@ -104,7 +104,9 @@ class Subject {
     public function getWorksBySubject($subjectId)
     {
         $works = DB::select("
-            SELECT * FROM works
+            SELECT works.id_work, works.name, students.name as student, works.id_student, works.mark 
+            FROM works
+            INNER JOIN students
             WHERE id_class=?
             ORDER BY id_work;
         ", [$subjectId]);
@@ -118,7 +120,9 @@ class Subject {
     public function getExamsBySubject($subjectId)
     {
         $exams = DB::select("
-            SELECT * FROM exams
+            SELECT exams.id_exam, exams.name, exams.id_student, students.name as student, exams.mark  
+            FROM exams
+            INNER JOIN students            
             WHERE id_class=?
             ORDER BY id_exam;
         ", [$subjectId]);

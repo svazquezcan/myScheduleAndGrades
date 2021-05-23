@@ -37,8 +37,9 @@
                             <td>
                                 <a 
                                     href="{{ route('subject.showWorksAndExams', ['id' => $subject['id_class']]) }}"  
-                                    class="btn btn-primary btn-sm">                                   
-                                    <i class="fa fa-info-circle"></i>
+                                    class="btn btn-primary btn-sm" 
+                                    title="Información">                                  
+                                    <i class="fa fa-info-circle"></i>                                    
                                 </a>
                                 <a
                                     class="btn btn-sm btn-primary"
